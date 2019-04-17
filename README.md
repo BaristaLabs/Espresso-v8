@@ -7,8 +7,8 @@ libraries required to embed the V8 JavaScript engine into a C++ project.
 
 | Package                     | Version
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
-|V8 x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-win-x86.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-win-x86/)|
-|V8 x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-win-x64.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-win-x64/)|
+|V8 x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x86.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-win-x86/)|
+|V8 x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x64.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-win-x64/)|
 
 ## Usage
 
@@ -29,7 +29,7 @@ There are 3 package kinds:
   * `BaristaLabs.Espresso.v8.win-redist-$Platform.$Version` - prebuilt V8 binaries:
     dlls, blobs, etc.
 
-  * `BaristaLabs.Espresso.v8.win-symbols-$PlatformToolset-$Platform.$Version` - debug symbols for V8:
+  * `BaristaLabs.Espresso.v8.win-symbols-$Platform.$Version` - debug symbols for V8:
     [pdb files](https://en.wikipedia.org/wiki/Program_database)
 
 After successful packages installation add `#include <v8.h>` in a C++  project
