@@ -7,7 +7,7 @@
     <owners>The V8 NuGet package Authors</owners>
     <projectUrl>https://github.com/BaristaLabs/Espresso-v8-win</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/wiki/v8/v8/images/v8logo.png</iconUrl>
-    <licenseUrl>https://raw.githubusercontent.com/v8/v8/master/LICENSE.v8</licenseUrl>
+    <license type="expression">BSD</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Developer files (headers/libraries) for V8 JavaScript Engine.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
