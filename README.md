@@ -1,55 +1,35 @@
-# NuGet package for V8 JavaScript Engine
+# Automated V8 Builds using Azure DevOps
 
 This packages contain prebuilt V8 binaries, debug symbols, headers and
 libraries required to embed the V8 JavaScript engine into a C++ project.
 
+> Note: This repository contains V8 builds targeting VS2019 and a different set of GN_Options used for Espresso. See [this repository](https://github.com/pmed/v8-nuget) for a richer set of target environments.
+
 | Package                     | Version
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
-|V8 x86 for Visual Studio 2013|[![NuGet](https://img.shields.io/nuget/v/v8-v120-x86.svg)](https://www.nuget.org/packages/v8-v120-x86/)|
-|V8 x86 for Visual Studio 2015|[![NuGet](https://img.shields.io/nuget/v/v8-v140-x86.svg)](https://www.nuget.org/packages/v8-v140-x86/)|
-|V8 x86 for Visual Studio 2017|[![NuGet](https://img.shields.io/nuget/v/v8-v141-x86.svg)](https://www.nuget.org/packages/v8-v141-x86/)|
-|V8 x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/v8-v142-x86.svg)](https://www.nuget.org/packages/v8-v142-x86/)|
-|V8 x64 for Visual Studio 2013|[![NuGet](https://img.shields.io/nuget/v/v8-v120-x64.svg)](https://www.nuget.org/packages/v8-v120-x64/)|
-|V8 x64 for Visual Studio 2015|[![NuGet](https://img.shields.io/nuget/v/v8-v140-x64.svg)](https://www.nuget.org/packages/v8-v140-x64/)|
-|V8 x64 for Visual Studio 2017|[![NuGet](https://img.shields.io/nuget/v/v8-v141-x64.svg)](https://www.nuget.org/packages/v8-v141-x64/)|
-|V8 x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/v8-v142-x64.svg)](https://www.nuget.org/packages/v8-v142-x64/)|
-|V8 x86 for Visual Studio 2013 XP platform toolset|[![NuGet](https://img.shields.io/nuget/v/v8-v120_xp-x86.svg)](https://www.nuget.org/packages/v8-v120_xp-x86/)|
-|V8 x86 for Visual Studio 2015 XP platform toolset|[![NuGet](https://img.shields.io/nuget/v/v8-v140_xp-x86.svg)](https://www.nuget.org/packages/v8-v140_xp-x86/)|
-|V8 x86 for Visual Studio 2017 XP platform toolset|[![NuGet](https://img.shields.io/nuget/v/v8-v141_xp-x86.svg)](https://www.nuget.org/packages/v8-v141_xp-x86/)|
-|V8 x64 for Visual Studio 2013 XP platform toolset|[![NuGet](https://img.shields.io/nuget/v/v8-v120_xp-x64.svg)](https://www.nuget.org/packages/v8-v120_xp-x64/)|
-|V8 x64 for Visual Studio 2015 XP platform toolset|[![NuGet](https://img.shields.io/nuget/v/v8-v140_xp-x64.svg)](https://www.nuget.org/packages/v8-v140_xp-x64/)|
-|V8 x64 for Visual Studio 2017 XP platform toolset|[![NuGet](https://img.shields.io/nuget/v/v8-v141_xp-x64.svg)](https://www.nuget.org/packages/v8-v141_xp-x64/)|
-
+|V8 x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-win-x86.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-win-x86/)|
+|V8 x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-win-x64.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-win-x64/)|
 
 ## Usage
 
-To use V8 in a project install the package `v8-$PlatformToolset-$Platform.$Version`
+To use V8 in a project install the package `BaristaLabs.Espresso.v8.win-$Platform.$Version`
 from a console with `nuget install` command or from inside of Visual Studio
 (see menu option *Tools -> NuGet Package Manager -> Manage NuGet Packages for Solution...*)
 where
 
-  * `$PlatformToolset` is the C++ toolset version used in Visual Studio:
-    * `v120` - for Visual Studio 2013
-    * `v140` - for Visual Studio 2015
-    * `v141` - for Visual Studio 2017
-    * `v142` - for Visual Studio 2019
-    * `v120_xp` - for Visual Studio 2013 XP platform toolset
-    * `v140_xp` - for Visual Studio 2015 XP platform toolset
-    * `v141_xp` - for Visual Studio 2017 XP platform toolset
-  
   * `$Platform` is a target platform type, currently `x86` or `x64`.
 
   * `$Version` is the actual V8 version, one of https://chromium.googlesource.com/v8/v8.git/+refs
 
 There are 3 package kinds:
 
-  * `v8-$PlatformToolset-$Platform.$Version` - contains developer header and 
+  * `BaristaLabs.Espresso.v8.win-$Platform.$Version` - contains developer header and 
     library files; depends on `v8.redist` package
 
-  * `v8.redist-$PlatformToolset-$Platform.$Version` - prebuilt V8 binaries:
+  * `BaristaLabs.Espresso.v8.win-redist-$Platform.$Version` - prebuilt V8 binaries:
     dlls, blobs, etc.
 
-  * `v8.symbols-$PlatformToolset-$Platform.$Version` - debug symbols for V8:
+  * `BaristaLabs.Espresso.v8.win-symbols-$PlatformToolset-$Platform.$Version` - debug symbols for V8:
     [pdb files](https://en.wikipedia.org/wiki/Program_database)
 
 After successful packages installation add `#include <v8.h>` in a C++  project

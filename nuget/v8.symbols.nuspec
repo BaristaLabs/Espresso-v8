@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>BaristaLabs.Espresso.v8-symbols-win-$Platform$</id>
+    <id>BaristaLabs.Espresso.v8.win-symbols-$Platform$</id>
     <version>$Version$</version>
     <authors>The V8 JavaScript Engine Authors</authors>
     <owners>The V8 NuGet package Authors</owners>
@@ -12,7 +12,7 @@
     <description>Debug symbols for V8 JavaScript Engine redistrubutable files.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
     <dependencies>
-      <dependency id="BaristaLabs.Espresso.v8-redist-win-$Platform$" version="[$version$]" /> 
+      <dependency id="BaristaLabs.Espresso.v8.win-redist-$Platform$" version="[$version$]" /> 
     </dependencies>
   </metadata>
   <files>
