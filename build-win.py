@@ -38,7 +38,6 @@ GN_OPTIONS = [
 	'use_custom_libcxx=false',
 	'use_custom_libcxx_for_host=false',
 	'v8_use_external_startup_data=true',
-	'is_clang=false',
 	'treat_warnings_as_errors=false',
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true',
