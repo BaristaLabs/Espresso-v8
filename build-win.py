@@ -24,8 +24,6 @@ PLATFORMS = [PLATFORM] if PLATFORM else ['x86', 'x64']
 CONFIGURATION = sys.argv[3] if len(sys.argv) > 3 else os.environ.get('CONFIGURATION', '')
 CONFIGURATIONS = [CONFIGURATION] if CONFIGURATION else ['Debug', 'Release']
 
-XP_TOOLSET = (sys.argv[4] if len(sys.argv) > 4 else os.environ.get('XP')) == '1'
-
 PACKAGES = ['v8', 'v8.redist', 'v8.symbols']
 
 BIN_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bin')
@@ -38,6 +36,7 @@ GN_OPTIONS = [
 	'use_custom_libcxx=false',
 	'use_custom_libcxx_for_host=false',
 	'v8_use_external_startup_data=true',
+	'is_clang=false',
 	'treat_warnings_as_errors=false',
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true',
@@ -112,25 +111,6 @@ env['DEPOT_TOOLS_WIN_TOOLCHAIN'] = '0'
 env['GYP_MSVS_VERSION'] = vs_version
 env['GYP_MSVS_OVERRIDE_PATH'] = vs_install_dir
 
-if XP_TOOLSET:
-	if toolset.startswith('v142'):
-		raise RuntimeError("XP toolset is not supported")
-	env['INCLUDE'] = r'%ProgramFiles(x86)%\Microsoft SDKs\Windows\7.1A\Include;' + env.get('INCLUDE', '')
-	env['PATH'] = r'%ProgramFiles(x86)%\Microsoft SDKs\Windows\7.1A\Bin;' + env.get('PATH', '')
-	env['LIB'] = r'%ProgramFiles(x86)%\Microsoft SDKs\Windows\7.1A\Lib;' + env.get('LIB', '')
-	toolset += '_xp'
-
-if toolset.startswith('v141') or toolset.startswith('v142'):
-	is_clang = 'false'
-else:
-	is_clang = 'true'
-	subprocess.check_call([sys.executable, 'tools/clang/scripts/update.py'], cwd='v8', env=env)
-	del env['GYP_MSVS_VERSION']
-	del env['GYP_MSVS_OVERRIDE_PATH']
-
-#import pprint
-#pprint.pprint(env)
-
 print 'V8 version', version
 print 'Visual Studio', vs_version, 'in', vs_install_dir
 print 'C++ Toolset', toolset
@@ -145,16 +125,13 @@ if os.path.isfile('v8/build/util/lastchange.py'):
 
 ## Build V8
 for arch in PLATFORMS:
-#	if 'CLANG_TOOLSET' in env:
-#		prefix = 'amd64' if arch == 'x64' else arch
-#		env['PATH'] = os.path.join(vs_install_dir, r'VC\ClangC2\bin', prefix, prefix) + ';' + env.get('PATH', '')
 	arch = arch.lower()
 	for conf in CONFIGURATIONS:
 		### Generate build.ninja files in out.gn/V8_VERSION/toolset/arch/conf directory
 		out_dir = os.path.join(V8_VERSION, toolset, arch, conf)
 		builder = ('ia32' if arch == 'x86' else arch) + '.' + conf.lower()
 		subprocess.check_call([sys.executable, 'tools/dev/v8gen.py',
-			'-b', builder, out_dir, '-vv', '--', 'is_clang='+is_clang] + GN_OPTIONS, cwd='v8', env=env)
+			'-b', builder, out_dir, '-vv', '--'] + GN_OPTIONS, cwd='v8', env=env)
 		### Build V8 with ninja from the generated files
 		out_dir = os.path.join('out.gn', out_dir)
 		subprocess.check_call([NINJA, '-C', out_dir, 'v8'], cwd='v8', env=env)
