@@ -5,8 +5,6 @@ libraries required to embed the V8 JavaScript engine into a C++ project.
 
 > Note: This repository contains V8 builds targeting VS2019 and a different set of GN_Options used for Espresso. See [this repository](https://github.com/pmed/v8-nuget) for a richer set of target environments.
 
-Visit https://omahaproxy.appspot.com/ for a list of the V8 versions that correspond to a Chrome build. 
-
 | Package                     | Version
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
 |V8 x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x86.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-win-x86/)|
@@ -38,6 +36,13 @@ After successful packages installation add `#include <v8.h>` in a C++  project
 and build it. All necessary files (*.lib, *.dll, *.pdb) would be referenced
 in the project automatically with MsBuild property sheets.
 
+## Publishing
+
+Visit https://omahaproxy.appspot.com/ for a list of the V8 versions that correspond to a Chrome build. 
+
+Execute ```python build-win.py $Version```
+
+Publish ```nuget push *.nupkg $NugetAPIKey -Source https://nuget.org/```
 
 ## How to build
 
