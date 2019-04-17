@@ -40,7 +40,6 @@ GN_OPTIONS = [
 	'v8_use_external_startup_data=true',
 	'is_clang=false',
 	'treat_warnings_as_errors=false',
-	'use_jumbo_build=true',
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true',
 ]
