@@ -24,7 +24,7 @@ PLATFORMS = [PLATFORM] if PLATFORM else ['x86', 'x64']
 CONFIGURATION = sys.argv[3] if len(sys.argv) > 3 else os.environ.get('CONFIGURATION', '')
 CONFIGURATIONS = [CONFIGURATION] if CONFIGURATION else ['Debug', 'Release']
 
-PACKAGES = ['v8', 'v8.redist', 'v8.symbols']
+PACKAGES = ['v8']
 
 BIN_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bin')
 GN = os.path.join(BIN_DIR, 'gn.exe')
@@ -100,7 +100,7 @@ vs_versions = {
 	'15.0': { 'version': '2017', 'toolset': 'v141' },
 	'16.0': { 'version': '2019', 'toolset': 'v142' },
 }
-vs_version = vs_versions[os.environ.get('VisualStudioVersion', '14.0')]
+vs_version = vs_versions[os.environ.get('VisualStudioVersion', '16.0')]
 toolset = vs_version['toolset']
 vs_version = vs_version['version']
 vs_install_dir = os.path.abspath(os.path.join(os.environ['VCINSTALLDIR'], os.pardir))
