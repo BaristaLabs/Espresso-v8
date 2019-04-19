@@ -147,7 +147,7 @@ for arch in PLATFORMS:
 		## Generate property sheets with specific conditions
 		props = open('nuget/{}.props'.format(name)).read()
 		props = props.replace('$Condition$', condition)
-		open('nuget/{}-{}-{}.props'.format(name, toolset, arch), 'w+').write(props)
+		open('nuget/BaristaLabs.Espresso.{}-{}.props'.format(name, arch), 'w+').write(props)
 
 		nuspec = name + '.nuspec'
 		print 'NuGet pack {} for V8 {} {} {}'.format(nuspec, version, toolset, arch)
@@ -158,4 +158,4 @@ for arch in PLATFORMS:
 			'-OutputDirectory', '..'
 		]
 		subprocess.check_call(['nuget', 'pack', nuspec] + nuget_args, cwd='nuget')
-		os.remove('nuget/{}-{}-{}.props'.format(name, toolset, arch))
+		os.remove('nuget/BaristaLabs.Espresso.{}-{}.props'.format(name, arch))
