@@ -24,20 +24,20 @@ PLATFORMS = [PLATFORM] if PLATFORM else ['x64']
 CONFIGURATION = sys.argv[3] if len(sys.argv) > 3 else os.environ.get('CONFIGURATION', '')
 CONFIGURATIONS = [CONFIGURATION] if CONFIGURATION else ['Release']
 
-PACKAGES = ['v8.win', 'v8.win.redist', 'v8.win.symbols']
+PACKAGES = ['v8-static.win']
 
 BIN_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bin')
 GN = os.path.join(BIN_DIR, 'gn.exe')
 NINJA = os.path.join(BIN_DIR, 'ninja.exe')
 
 GN_OPTIONS = [
-	'is_clang=false',
-	'is_component_build=true',
+	'is_component_build=false',
+	'v8_static_library=true',
 	'use_custom_libcxx=false',
 	'use_custom_libcxx_for_host=false',
 	'v8_use_external_startup_data=true',
+	'is_clang=false',
 	'treat_warnings_as_errors=false',
-	'use_jumbo_build=true',
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true',
 ]
@@ -110,9 +110,6 @@ env['SKIP_V8_GYP_ENV'] = '1'
 env['DEPOT_TOOLS_WIN_TOOLCHAIN'] = '0'
 env['GYP_MSVS_VERSION'] = vs_version
 env['GYP_MSVS_OVERRIDE_PATH'] = vs_install_dir
-
-#import pprint
-#pprint.pprint(env)
 
 print 'V8 version', version
 print 'Visual Studio', vs_version, 'in', vs_install_dir
