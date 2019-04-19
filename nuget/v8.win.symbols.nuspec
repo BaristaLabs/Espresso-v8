@@ -12,7 +12,7 @@
     <description>Debug symbols for V8 JavaScript Engine redistrubutable files.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
     <dependencies>
-      <dependency id="v8.redist-$PlatformToolset$-$Platform$" version="[$version$]" /> 
+      <dependency id="BaristaLabs.Espresso.v8.win-redist-$Platform$" version="[$version$]" /> 
     </dependencies>
   </metadata>
   <files>
