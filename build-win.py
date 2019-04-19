@@ -24,7 +24,7 @@ PLATFORMS = [PLATFORM] if PLATFORM else ['x64']
 CONFIGURATION = sys.argv[3] if len(sys.argv) > 3 else os.environ.get('CONFIGURATION', '')
 CONFIGURATIONS = [CONFIGURATION] if CONFIGURATION else ['Release']
 
-PACKAGES = ['v8.win', 'v8.win.redist', 'v8.win.symbols']
+PACKAGES = ['v8.win', 'v8.win-redist', 'v8.win-symbols']
 
 BIN_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bin')
 GN = os.path.join(BIN_DIR, 'gn.exe')
@@ -161,4 +161,4 @@ for arch in PLATFORMS:
 			'-OutputDirectory', '..'
 		]
 		subprocess.check_call(['nuget', 'pack', nuspec] + nuget_args, cwd='nuget')
-		os.remove('nuget/{}-{}-{}.props'.format(name, toolset, arch))
+		os.remove('nuget/BaristaLabs.Espresso.{}-{}.props'.format(name, arch))
