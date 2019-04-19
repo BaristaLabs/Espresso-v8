@@ -150,7 +150,7 @@ for arch in PLATFORMS:
 		## Generate property sheets with specific conditions
 		props = open('nuget/{}.props'.format(name)).read()
 		props = props.replace('$Condition$', condition)
-		open('nuget/BaristaLabs.Espresso.{}-{}-{}.props'.format(name, arch), 'w+').write(props)
+		open('nuget/BaristaLabs.Espresso.{}-{}.props'.format(name, arch), 'w+').write(props)
 
 		nuspec = name + '.nuspec'
 		print 'NuGet pack {} for V8 {} {} {}'.format(nuspec, version, toolset, arch)
