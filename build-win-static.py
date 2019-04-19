@@ -22,7 +22,7 @@ PLATFORM = sys.argv[2] if len(sys.argv) > 2 else os.environ.get('PLATFORM', '')
 PLATFORMS = [PLATFORM] if PLATFORM else ['x64']
 
 CONFIGURATION = sys.argv[3] if len(sys.argv) > 3 else os.environ.get('CONFIGURATION', '')
-CONFIGURATIONS = [CONFIGURATION] if CONFIGURATION else ['Release']
+CONFIGURATIONS = [CONFIGURATION] if CONFIGURATION else ['Debug', 'Release']
 
 PACKAGES = ['v8-static.win']
 
