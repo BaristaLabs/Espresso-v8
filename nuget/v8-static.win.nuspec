@@ -15,6 +15,11 @@
   </metadata>
   <files>
     <file src="..\v8\include\**\*.h" target="include" />
+    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\obj\third_party\icu\icu*.lib" target="lib\Debug\icu" />
+    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\obj\src\inspector\inspector.lib" target="lib\Debug\inspector" />
+    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\obj\v8*.lib" target="lib\Debug" />
+    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\*_blob.bin" target="lib\Debug" />
+    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\v8_build_config.json" target="lib\Debug" />
     <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Release\obj\third_party\icu\icu*.lib" target="lib\Release\icu" />
     <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Release\obj\src\inspector\inspector.lib" target="lib\Release\inspector" />
     <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Release\obj\v8*.lib" target="lib\Release" />
