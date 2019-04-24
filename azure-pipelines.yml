@@ -12,8 +12,7 @@ jobs:
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '2.7.14' 
-        addToPath: true 
-        architecture: 'x32'
+        addToPath: true
     - script: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"
         where /R "%ProgramFiles(x86)%" dbghelp.dll
