@@ -7,7 +7,7 @@
     <authors>The V8 JavaScript Engine Authors</authors>
     <owners>The V8 NuGet package Authors</owners>
     <projectUrl>https://github.com/BaristaLabs/Espresso-v8-win</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/wiki/v8/v8/images/v8logo.png</iconUrl>
+    <iconUrl>https://github.com/BaristaLabs/BaristaCore/raw/master/Logo.png</iconUrl>
     <license type="expression">BSD-3-Clause</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Statically compiled V8 JavaScript Libraries.</description>
