@@ -2,6 +2,12 @@ jobs:
 - job: Build_VS2019
   pool:
     vmImage: 'windows-2019'
+  strategy:
+    matrix:
+      x86:
+        PLATFORM: 'x86'
+      x64:
+        PLATFORM: 'x64'
   steps:
     - task: UsePythonVersion@0
       inputs:
@@ -13,4 +19,6 @@ jobs:
         where /R "%ProgramFiles(x86)%" dbghelp.dll
         where /R "%ProgramW6432%" dbghelp.dll
         python build-win.py
+      env:
+        CONFIGURATION: $(PLATFORM)
     - script: nuget push *.nupkg %NUGET_API_KEY% -Source https://nuget.org/
