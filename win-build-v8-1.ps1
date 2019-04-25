@@ -14,6 +14,10 @@ $start_time = Get-Date
 Expand-Archive -LiteralPath "$PSScriptRoot\depot_tools.zip" -DestinationPath "$PSScriptRoot\depot_tools\"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
 
+#touch a metrics.cfg file to supress a warning when invoking gclient
+$metrics = '{"is-googler": false, "countdown": 10, "version": 1, "opt-in": null}'
+Set-Content -Path "$PSScriptRoot\depot_tools\metrics.cfg" -Value $metrics
+
 # Set Environment Variables
 # Add depot tools to the path
 $env:Path = "$PSScriptRoot\depot_tools\;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
@@ -21,11 +25,7 @@ $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
 $env:GYP_MSVS_VERSION=2019
 
 # Install/Configure Tools
+Write-Output "Invoking gclient..."
+$start_time = Get-Date
 cmd.exe /c "gclient"
-Where-Object python
-git config --global user.name "My Name"
-git config --global user.email "my-name@chromium.org"
-git config --global core.autocrlf false
-git config --global core.filemode false
-git config --global branch.autosetupmerge always
-git config --global branch.autosetuprebase always
+Write-Output "Time taken: $((Get-Date).Subtract($start_time))"

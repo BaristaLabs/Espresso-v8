@@ -10,6 +10,14 @@ $env:Path = "$PSScriptRoot\depot_tools\;" + [System.Environment]::GetEnvironment
 $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
 $env:GYP_MSVS_VERSION=2019
 
+# Configure Git
+git config --global user.name "My Name"
+git config --global user.email "my-name@chromium.org"
+git config --global core.autocrlf false
+git config --global core.filemode false
+git config --global branch.autosetupmerge always
+git config --global branch.autosetuprebase always
+
 $path = "$PSScriptRoot\v8"
 # Fixes fetch error "LookupError: unknown encoding: cp65001"
 $env:PYTHONIOENCODING = "UTF-8"
