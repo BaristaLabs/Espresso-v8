@@ -1,11 +1,11 @@
 variables:
   V8_VERSION: '7.4.288.25'
-  build_windows: true
-  build_macOS: true
+  build_windows: 'true'
+  build_macOS: 'true'
 jobs:
 - job: Build_VS2019
   displayName: "Build v8 on Windows"
-  condition: variables['build_windows']
+  condition: eq(variables['build_windows'], 'true')
   pool:
     vmImage: 'windows-2019'
   strategy:
@@ -52,7 +52,7 @@ jobs:
         versionEnvVar: "V8_VERSION"
 - job: Build_macOS
   displayName: "Build v8 on macOS"
-  condition: variables['build_macOS']
+  condition: eq(variables['build_macOS'], 'true')
   pool:
     vmImage: 'macOS-10.14'
   strategy:
