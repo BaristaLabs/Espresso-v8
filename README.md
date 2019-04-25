@@ -6,9 +6,11 @@ This package contains pre-built V8 libraries and headers required to embed the V
 
 | Package                     | Version
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
-|V8 Windows x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x86.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x86/)|
-|V8 Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x64.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64/)|
+|V8 Windows x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-ia32.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-ia32.release/)|
+|V8 Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/)|
 |V8 Static x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-static.win-x64.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-static.win-x64/)|
+|V8 macOS x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.macOS-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.macOS-x64.release/)|
+|V8 Ubuntu x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.ubuntu-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.ubuntu-x64.release/)|
 
 ## Usage
 
