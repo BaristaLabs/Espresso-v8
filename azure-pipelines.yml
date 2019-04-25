@@ -36,7 +36,7 @@ jobs:
         versionEnvVar: "V8_VERSION"
     - task: NuGetCommand@2
       displayName: "Publish NuGet Packages to NuGet Feed"
-       inputs:
+      inputs:
         command: push
         nuGetFeedType: external
         publishFeedCredentials: 'nuget.org'
