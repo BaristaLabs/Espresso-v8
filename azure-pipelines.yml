@@ -5,19 +5,32 @@ jobs:
   strategy:
     matrix:
       x86:
-        PLATFORM: 'x86'
+        PLATFORM: 'ia32-release'
       x64:
-        PLATFORM: 'x64'
+        PLATFORM: 'x64-release'
   steps:
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '2.7.14' 
         addToPath: true
-    - script: |
-        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"
-        where /R "%ProgramFiles(x86)%" dbghelp.dll
-        where /R "%ProgramW6432%" dbghelp.dll
-        python build-win.py
+    - task: PowerShell@2
+      inputs:
+        filePath: "win-build-v8-1.ps1"
+      env:
+        CONFIGURATION: $(PLATFORM)
+    - task: PowerShell@2
+      inputs:
+        filePath: "win-build-v8-2.ps1"
+      env:
+        CONFIGURATION: $(PLATFORM)
+    - task: PowerShell@2
+      inputs:
+        filePath: "win-build-v8-3.ps1"
+      env:
+        CONFIGURATION: $(PLATFORM)
+    - task: PowerShell@2
+      inputs:
+        filePath: "win-build-v8-4.ps1"
       env:
         CONFIGURATION: $(PLATFORM)
     - script: nuget push *.nupkg %NUGET_API_KEY% -Source https://nuget.org/
