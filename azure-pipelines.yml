@@ -9,28 +9,29 @@ jobs:
       x64:
         PLATFORM: 'x64.release'
   steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '2.7.14' 
-        addToPath: true
     - task: PowerShell@2
+      displayName: "Initialize Environment"
       inputs:
         filePath: "win-build-v8-1.ps1"
       env:
         CONFIGURATION: $(PLATFORM)
     - task: PowerShell@2
+      displayName: "Fetch v8 from source"
       inputs:
         filePath: "win-build-v8-2.ps1"
       env:
         CONFIGURATION: $(PLATFORM)
     - task: PowerShell@2
+      displayName: "Build v8"
       inputs:
         filePath: "win-build-v8-3.ps1"
       env:
         CONFIGURATION: $(PLATFORM)
     - task: PowerShell@2
+      displayName: "Create NuGet Packages"
       inputs:
         filePath: "win-build-v8-4.ps1"
       env:
         CONFIGURATION: $(PLATFORM)
     - script: nuget push *.nupkg %NUGET_API_KEY% -Source https://nuget.org/
+        displayName: "Publish NuGet Packages"
