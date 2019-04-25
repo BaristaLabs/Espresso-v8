@@ -1,11 +1,17 @@
 variables:
   V8_VERSION: '7.4.288.25'
-  build_windows: 'false'
-  build_macOS: 'true'
 jobs:
+- job: CheckIfBuildNeeded
+  displayName: "Determines if a build is necessary."
+  steps:
+    - task: PowerShell@2
+      displayName: "Determine if a build is necessary"
+      inputs:
+        filePath: "checkIfBuildNeeded.ps1"
 - job: Build_VS2019
   displayName: "Build v8 on Windows"
-  condition: eq(variables['build_windows'], 'true')
+  dependsOn: CheckIfBuildNeeded
+  condition: and(succeeded(), eq(variables['build_windows'], 'true'))
   pool:
     vmImage: 'windows-2019'
   strategy:
@@ -26,7 +32,7 @@ jobs:
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "win-build-v8-2.ps1"
+        filePath: "win-build-v8-2.ps1 -V8_VERSION $(V8_VERSION_WINDOWS)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
@@ -41,7 +47,7 @@ jobs:
         command: pack
         packagesToPack: "*.nuspec"
         versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION"
+        versionEnvVar: "V8_VERSION_WINDOWS"
     - task: NuGetCommand@2
       displayName: "Push NuGet Packages to NuGet Feed"
       inputs:
@@ -49,10 +55,11 @@ jobs:
         nuGetFeedType: external
         publishFeedCredentials: 'nuget.org'
         versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION"
+        versionEnvVar: "V8_VERSION_WINDOWS"
 - job: Build_macOS
   displayName: "Build v8 on macOS"
-  condition: eq(variables['build_macOS'], 'true')
+  dependsOn: CheckIfBuildNeeded
+  condition: and(succeeded(), eq(variables['build_macOS'], 'true'))
   pool:
     vmImage: 'macOS-10.14'
   strategy:
@@ -71,7 +78,7 @@ jobs:
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "macOS-build-v8-2.ps1"
+        filePath: "macOS-build-v8-2.ps1 -V8_VERSION $(V8_VERSION_MACOS)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
@@ -86,7 +93,7 @@ jobs:
         command: pack
         packagesToPack: "*.nuspec"
         versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION"
+        versionEnvVar: "V8_VERSION_MACOS"
     - task: NuGetCommand@2
       displayName: "Push NuGet Packages to NuGet Feed"
       inputs:
@@ -94,4 +101,4 @@ jobs:
         nuGetFeedType: external
         publishFeedCredentials: 'nuget.org'
         versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION"
+        versionEnvVar: "V8_VERSION_MACOS"
