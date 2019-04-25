@@ -1,6 +1,6 @@
 variables:
   V8_VERSION: '7.4.288.25'
-  build_windows: 'true'
+  build_windows: 'false'
   build_macOS: 'true'
 jobs:
 - job: Build_VS2019
