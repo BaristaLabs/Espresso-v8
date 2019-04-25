@@ -16,6 +16,9 @@ jobs:
     - task: PowerShell@2
       inputs:
         filePath: "win-build-v8-1.ps1"
+        failOnStderr: false
+        ignoreLASTEXITCODE: true
+        errorActionPreference: "continue"
       env:
         CONFIGURATION: $(PLATFORM)
     - task: PowerShell@2
