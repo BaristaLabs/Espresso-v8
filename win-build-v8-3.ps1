@@ -33,10 +33,11 @@ Set-Location $path
 $env:PYTHONIOENCODING = "UTF-8"
 
 #Tip: Run "python tools\dev\v8gen.py list" to see a list of possible build configurations.
-Write-Output "Generating build configuration for $CONFIGURATION..."
+$argsPath = "$path\out.gn\$CONFIGURATION\args.gn"
+Write-Output "Generating build configuration for $CONFIGURATION to $argsPath..."
 $start_time = Get-Date
 python tools\dev\v8gen.py $CONFIGURATION
-Add-Content "$path\out.gn\$CONFIGURATION\args.gn" ($GN_OPTIONS -join "`n")
+Add-Content $argsPath ($GN_OPTIONS -join "`n")
 Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
 
 #run gn gen

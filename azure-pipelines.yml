@@ -5,9 +5,9 @@ jobs:
   strategy:
     matrix:
       x86:
-        PLATFORM: 'ia32-release'
+        PLATFORM: 'ia32.release'
       x64:
-        PLATFORM: 'x64-release'
+        PLATFORM: 'x64.release'
   steps:
     - task: UsePythonVersion@0
       inputs:
