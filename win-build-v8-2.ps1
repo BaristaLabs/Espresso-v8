@@ -4,6 +4,12 @@ param (
     [string]$V8_VERSION = (&{If([string]::IsNullOrWhiteSpace($env:V8_VERSION)) {"7.4.288.25"} Else {$env:V8_VERSION}})
 )
 
+# Set Environment Variables
+# Add depot tools to the path
+$env:Path = "$PSScriptRoot\depot_tools\;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+$env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
+$env:GYP_MSVS_VERSION=2019
+
 $path = "$PSScriptRoot\v8"
 # Fixes fetch error "LookupError: unknown encoding: cp65001"
 $env:PYTHONIOENCODING = "UTF-8"

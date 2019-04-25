@@ -20,6 +20,12 @@ foreach($name in $V8VersionParts) {
 	$version += $rx.Match($V8Version).Groups[1].Value
 }
 
+# Set Environment Variables
+# Add depot tools to the path
+$env:Path = "$PSScriptRoot\depot_tools\;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+$env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
+$env:GYP_MSVS_VERSION=2019
+
 $version = [string]::Join('.', $version)
 
 foreach($name in $PACKAGES) {

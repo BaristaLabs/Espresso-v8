@@ -4,6 +4,12 @@ param (
     [string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}})
 )
 
+# Set Environment Variables
+# Add depot tools to the path
+$env:Path = "$PSScriptRoot\depot_tools\;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+$env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
+$env:GYP_MSVS_VERSION=2019
+
 $path = "$PSScriptRoot\v8\v8"
 $GN_OPTIONS = @(
 	'is_clang=false',
