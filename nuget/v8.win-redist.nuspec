@@ -13,11 +13,11 @@
     <tags>V8 javascript embedded native nativepackage</tags>
   </metadata>
   <files>
-    <file src="..\v8\v8\out.gn\$Configuration$\v8*.dll" target="lib" />
-    <file src="..\v8\v8\out.gn\$Configuration$\icu*.dll" target="lib" />
-    <file src="..\v8\v8\out.gn\$Configuration$\icu*.dat" target="lib" />
-    <file src="..\v8\v8\out.gn\$Configuration$\*_blob.bin" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\v8*.dll" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\icu*.dll" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\icu*.dat" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\*_blob.bin" target="lib" />
     <file src="BaristaLabs.Espresso.v8.win-redist-$Configuration$.props" target="build\native" />
-    <file src="..\readme.md" target="" />
+    <file src=".\readme.md" target="" />
   </files>
 </package>

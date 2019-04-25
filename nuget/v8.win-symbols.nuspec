@@ -16,8 +16,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\v8\v8\out.gn\$Configuration$\v8*.pdb" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\v8*.pdb" target="lib" />
     <file src="BaristaLabs.Espresso.v8.win-symbols-$Configuration$.props" target="build\native" />
-    <file src="..\readme.md" target="" />
+    <file src=".\readme.md" target="" />
   </files>
 </package>

@@ -1,5 +1,5 @@
 # Powershell version of https://chromium.googlesource.com/chromium/src/+/master/docs/windows_build_instructions.md
-# This script generates the nuget packages.
+# This script generates the nuget nuspec files.
 param (
     [string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}})
 )
@@ -25,19 +25,14 @@ foreach($name in $PACKAGES) {
 	$nuspec = Get-Content "$PSScriptRoot\nuget\$name.nuspec" -Raw
 	$nuspec = $nuspec.Replace('$Configuration$',$CONFIGURATION)
 	$nuspec = $nuspec.Replace('$Version$',$version)
-	$nuspecPath = "$PSScriptRoot\nuget\BaristaLabs.Espresso.$name-$CONFIGURATION.nuspec"
+	$nuspecPath = "$PSScriptRoot\BaristaLabs.Espresso.$name-$CONFIGURATION.nuspec"
 	Set-Content -Path $nuspecPath -Value $nuspec
 
 	$props = Get-Content "$PSScriptRoot\nuget\$name.props" -Raw
 	$props = $props.Replace('$Configuration$',$CONFIGURATION)
 	$props = $props.Replace('$Version$',$version)
-	$propsPath = "$PSScriptRoot\nuget\BaristaLabs.Espresso.$name-$CONFIGURATION.props"
+	$propsPath = "$PSScriptRoot\BaristaLabs.Espresso.$name-$CONFIGURATION.props"
 	Set-Content -Path $propsPath -Value $props
-	
-	Write-Output "NuGet pack $name for V8 $CONFIGURATION $Version..."
-	nuget pack "$nuspecPath" -NoPackageAnalysis -Version "$version" -OutputDirectory ".."
-	Remove-Item -LiteralPath $nuspecPath
-	Remove-Item -LiteralPath $propsPath
 }
 
 Set-Location $PSScriptRoot
