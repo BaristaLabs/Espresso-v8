@@ -2,7 +2,7 @@ variables:
   V8_VERSION: '7.4.288.25'
 jobs:
 - job: Build_VS2019
-  displayName: "Build v8 on Windows using the 2019 toolkit"
+  displayName: "Build v8 on Windows"
   pool:
     vmImage: 'windows-2019'
   strategy:
@@ -21,7 +21,7 @@ jobs:
       inputs:
         filePath: "win-build-v8-1.ps1"
     - task: PowerShell@2
-      displayName: "Fetch v8 from source"
+      displayName: "Fetch v8 from source for the specified version"
       inputs:
         filePath: "win-build-v8-2.ps1"
     - task: PowerShell@2
@@ -37,7 +37,7 @@ jobs:
       inputs:
         command: pack
         packagesToPack: "*.nuspec"
-        basePath: '$(Build.SourcesDirectory)'
+        # basePath: '$(Build.SourcesDirectory)'
         versioningScheme: byEnvVar
         versionEnvVar: "V8_VERSION"
     - task: NuGetCommand@2
