@@ -2,6 +2,7 @@ variables:
   V8_VERSION: '7.4.288.25'
 jobs:
 - job: Build_VS2019
+  displayName: "Build v8 on Windows using the 2019 toolkit"
   pool:
     vmImage: 'windows-2019'
   strategy:
@@ -11,8 +12,12 @@ jobs:
       x64:
         CONFIGURATION: 'x64.release'
   steps:
+    - task: NuGetToolInstaller@0
+      displayName: "Ensure a recent version of NuGet"
+      inputs:
+        versionSpec: '4.9.x'
     - task: PowerShell@2
-      displayName: "Initialize Environment"
+      displayName: "Initialize v8 build environment"
       inputs:
         filePath: "win-build-v8-1.ps1"
     - task: PowerShell@2
@@ -20,11 +25,11 @@ jobs:
       inputs:
         filePath: "win-build-v8-2.ps1"
     - task: PowerShell@2
-      displayName: "Build v8"
+      displayName: "Build v8 according to specified configuration"
       inputs:
         filePath: "win-build-v8-3.ps1"
     - task: PowerShell@2
-      displayName: "Create NuGet NuSpecs"
+      displayName: "Generate NuGet .nuspec files according to specified configuration"
       inputs:
         filePath: "win-build-v8-4.ps1"
     - task: NuGetCommand@2
@@ -32,10 +37,11 @@ jobs:
       inputs:
         command: pack
         packagesToPack: "*.nuspec"
+        basePath: '$(Build.SourcesDirectory)'
         versioningScheme: byEnvVar
         versionEnvVar: "V8_VERSION"
     - task: NuGetCommand@2
-      displayName: "Publish NuGet Packages to NuGet Feed"
+      displayName: "Push NuGet Packages to NuGet Feed"
       inputs:
         command: push
         nuGetFeedType: external

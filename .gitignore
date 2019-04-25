@@ -4,3 +4,5 @@
 *.nupkg
 depot_tools.zip
 /depot_tools
+/*.nuspec
+/*.props
