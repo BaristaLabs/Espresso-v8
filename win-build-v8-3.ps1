@@ -6,7 +6,10 @@ param (
 
 # Set Environment Variables
 # Add depot tools to the path
-$env:Path = "$PSScriptRoot\depot_tools\;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+$currentPath = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+if ($currentPath -match "^$PSScriptRoot\depot_tools\;") {
+    $env:Path = "$PSScriptRoot\depot_tools\;" + $currentPath
+}
 $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
 $env:GYP_MSVS_VERSION=2019
 
