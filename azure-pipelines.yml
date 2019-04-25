@@ -1,16 +1,16 @@
 variables:
   V8_VERSION: '7.4.288.25'
 jobs:
-- job: CheckIfBuildNeeded
-  displayName: "Determines if a build is necessary."
+- job: CheckReleaseStatus
+  displayName: "Determines what builds are necessary."
   steps:
     - task: PowerShell@2
-      displayName: "Determine if a build is necessary"
+      displayName: "Checks release status between stable and published"
       inputs:
-        filePath: "checkIfBuildNeeded.ps1"
+        filePath: "checkReleaseStatus.ps1"
 - job: Build_VS2019
   displayName: "Build v8 on Windows"
-  dependsOn: CheckIfBuildNeeded
+  dependsOn: CheckReleaseStatus
   condition: and(succeeded(), eq(variables['build_windows'], 'true'))
   pool:
     vmImage: 'windows-2019'
@@ -58,7 +58,7 @@ jobs:
         versionEnvVar: "V8_VERSION_WINDOWS"
 - job: Build_macOS
   displayName: "Build v8 on macOS"
-  dependsOn: CheckIfBuildNeeded
+  dependsOn: CheckReleaseStatus
   condition: and(succeeded(), eq(variables['build_macOS'], 'true'))
   pool:
     vmImage: 'macOS-10.14'
