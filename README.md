@@ -2,7 +2,7 @@
 
 This package contains scripts and configuration to perform automated multi-platform V8 Builds using Azure DevOps and publish the resulting binaries to NuGet. These pre-built V8 libraries and headers then can be used to embed the V8 JavaScript engine into multi-platform C++ projects.
 
-> Note: This repository contains dynamic and static V8 builds targeting win-VS2019, macOS, and Ubuntu using a different set of GN_Options used for BaristaLabs.Espresso. See [this repository](https://github.com/pmed/v8-nuget) for different platform toolsets.
+> Note: This repository contains dynamic and static V8 builds targeting win-VS2019, macOS, and Ubuntu using a different set of GN_Options used for BaristaLabs.Espresso. See [this repository](https://github.com/pmed/v8-nuget) for different windows-based platform toolsets.
 
 | Package                     | Version
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
