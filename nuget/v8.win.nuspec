@@ -17,9 +17,9 @@
   </metadata>
   <files>
     <file src=".\v8\v8\include\**\*.h" target="include" />
-    <file src=".\v8\v8\out.gn\$Configuration$\v8*.lib" target="lib" />
-    <file src=".\v8\v8\out.gn\$Configuration$\v8*.exp" target="lib" />
-    <file src=".\v8\v8\out.gn\$Configuration$\v8_build_config.json" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\v8*.lib" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\v8*.exp" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\v8_build_config.json" target="lib\$Configuration$\" />
     <file src="BaristaLabs.Espresso.v8.win-$Configuration$.props" target="build\native" />
     <file src=".\readme.md" target="" />
   </files>
