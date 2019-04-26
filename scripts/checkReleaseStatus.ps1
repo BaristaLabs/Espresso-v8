@@ -3,7 +3,7 @@ $v8VersionTableUrl = "https://omahaproxy.appspot.com/all?csv=1"
 $response = Invoke-WebRequest -Uri $v8VersionTableUrl -UseBasicParsing
 $csv = ConvertFrom-CSV $response.content
 
-$channel = "dev"
+$channel = "beta"
 $win64Stable = $csv | Where-Object {$_.os -eq "win64" -and $_.channel -eq $channel} | Select-Object -First 1
 $macOSStable = $csv | Where-Object {$_.os -eq "mac" -and $_.channel -eq $channel} | Select-Object -First 1
 $linuxStable = $csv | Where-Object {$_.os -eq "linux" -and $_.channel -eq $channel} | Select-Object -First 1
