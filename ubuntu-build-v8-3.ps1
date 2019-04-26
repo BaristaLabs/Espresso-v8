@@ -27,7 +27,6 @@ $GN_OPTIONS = @(
 )
 
 Set-Location $path
-xcode-select --print-path
 
 #Tip: Run "python tools/dev/v8gen.py list" to see a list of possible build configurations.
 $argsPath = "$path/out.gn/$CONFIGURATION/args.gn"

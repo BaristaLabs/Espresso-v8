@@ -51,5 +51,5 @@ Set-Location $PSScriptRoot
 # Install additional build tools
 Write-Output "Installing additional build tools..."
 $start_time = Get-Date
-./depot_tools/build/install-build-deps.sh
+./v8/v8/build/install-build-deps.sh
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
