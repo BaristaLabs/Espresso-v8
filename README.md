@@ -8,7 +8,7 @@ This package contains scripts and configuration to perform automated multi-platf
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
 |V8 Windows x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-ia32.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-ia32.release/)|
 |V8 Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/)|
-|V8 Static x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-static.win-x64.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-static.win-x64/)|
+|V8 Static x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-static.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-static.win-x64.release/)|
 |V8 macOS x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.macOS-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.macOS-x64.release/)|
 |V8 Ubuntu x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.ubuntu-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.ubuntu-x64.release/)|
 
@@ -61,9 +61,15 @@ Use the azure-pipelines.yml as a guide for the inputs.
 ``` Powershell
 ./scripts/win/win-build-v8-1.ps # Download v8 Build Dependencies
 ./scripts/win/win-build-v8-2.ps -V8_VERSION 7.4.288.25 # Fetch a specific v8 version from source
-./scripts/win/win-build-v8-3.ps # Fetch v8 from source
+./scripts/win/win-build-v8-3.ps # Build v8
+./scripts/win/win-build-v8-4.ps # Generate nuspec and props
 ```
 
 Once the 4 scripts have been run, package/push using NuGet.
+
+``` Powershell
+nuget pack
+nuget push *.nupkg -ApiKey <apikey> -Source https://api.nuget.org/v3/index.json
+```
 
 > Note: Visit https://omahaproxy.appspot.com/ for a list of the V8 versions that correspond to a Chrome build.

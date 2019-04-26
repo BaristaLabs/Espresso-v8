@@ -4,7 +4,7 @@
       <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)..\..\lib\$(Configuration)\icu;$(MSBuildThisFileDirectory)..\..\lib\$(Configuration)\inspector;$(MSBuildThisFileDirectory)..\..\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)..\..\lib\icu;$(MSBuildThisFileDirectory)..\..\lib\inspector;$(MSBuildThisFileDirectory)..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
 </Project>

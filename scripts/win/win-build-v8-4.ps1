@@ -27,6 +27,24 @@ foreach($name in $V8VersionParts) {
 }
 $version = [string]::Join('.', $version)
 
+$configParts = $CONFIGURATION.Split(".")
+$arch = $configParts[0]
+$config = $configParts[1]
+
+if ($arch -eq "ia32") {
+	$platform = "('`$(Platform)' == 'x86' Or '`$(Platform)' == 'Win32')"
+} else {
+	$platform = "'`$(Platform)' == '$arch'"
+}
+
+if ($config -eq "release") {
+	$config = "'`$(Configuration)' == 'Release'"
+} elseif ($config -eq "debug") {
+	$config = "'`$(Configuration)' == 'Debug'"
+}
+
+$condition = "'`$(PlatformToolset)' == 'v142' And $config And $platform"
+
 foreach($name in $PACKAGES) {
 	$nuspec = Get-Content "$PSCurrentPath\nuget\$name.nuspec" -Raw
 	$nuspec = $nuspec.Replace('$Configuration$',$CONFIGURATION)
@@ -37,6 +55,7 @@ foreach($name in $PACKAGES) {
 	$props = Get-Content "$PSCurrentPath\nuget\$name.props" -Raw
 	$props = $props.Replace('$Configuration$',$CONFIGURATION)
 	$props = $props.Replace('$Version$',$version)
+	$props = $props.Replace('$Condition$',$condition)
 	$propsPath = "$PSCurrentPath\BaristaLabs.Espresso.$name-$CONFIGURATION.props"
 	Set-Content -Path $propsPath -Value $props
 }

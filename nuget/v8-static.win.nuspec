@@ -1,8 +1,7 @@
-
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>BaristaLabs.Espresso.v8-static.win-$Platform$</id>
+    <id>BaristaLabs.Espresso.v8-static.win-$Configuration$</id>
     <version>$Version$</version>
     <authors>The V8 JavaScript Engine Authors</authors>
     <owners>The V8 NuGet package Authors</owners>
@@ -14,18 +13,13 @@
     <tags>V8 javascript embedded native static nativepackage</tags>
   </metadata>
   <files>
-    <file src="..\v8\include\**\*.h" target="include" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\obj\third_party\icu\icu*.lib" target="lib\Debug\icu" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\obj\src\inspector\inspector.lib" target="lib\Debug\inspector" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\obj\v8*.lib" target="lib\Debug" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\*_blob.bin" target="lib\Debug" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Debug\v8_build_config.json" target="lib\Debug" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Release\obj\third_party\icu\icu*.lib" target="lib\Release\icu" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Release\obj\src\inspector\inspector.lib" target="lib\Release\inspector" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Release\obj\v8*.lib" target="lib\Release" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Release\*_blob.bin" target="lib\Release" />
-    <file src="..\v8\out.gn\$BuildVersion$\$PlatformToolset$\$Platform$\Release\v8_build_config.json" target="lib\Release" />
-    <file src="v8-$PlatformToolset$-$Platform$.props" target="build\native" />
-    <file src="..\readme.md" target="" />
+    <file src=".\v8\v8\include\**\*.h" target="include" />
+    <file src=".\v8\v8\out.gn\$Configuration$\obj\third_party\icu\icu*.lib" target="lib\icu" />
+    <file src=".\v8\v8\out.gn\$Configuration$\obj\src\inspector\inspector.lib" target="lib\inspector" />
+    <file src=".\v8\v8\out.gn\$Configuration$\obj\v8*.lib" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\*_blob.bin" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\v8_build_config.json" target="lib" />
+    <file src="BaristaLabs.Espresso.v8-static.win-$Configuration$.props" target="build\native" />
+    <file src=".\readme.md" target="" />
   </files>
 </package>

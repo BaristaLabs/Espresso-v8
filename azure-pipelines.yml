@@ -51,16 +51,12 @@ jobs:
       inputs:
         command: pack
         packagesToPack: "*.nuspec"
-        versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION_WINDOWS"
     - task: NuGetCommand@2
       displayName: "Push NuGet Packages to NuGet Feed"
       inputs:
         command: push
         nuGetFeedType: external
         publishFeedCredentials: 'nuget.org'
-        versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION_WINDOWS"
 - job: Build_macOS
   displayName: "Build v8 on macOS"
   dependsOn: CheckReleaseStatus
@@ -100,16 +96,12 @@ jobs:
       inputs:
         command: pack
         packagesToPack: "*.nuspec"
-        versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION_MACOS"
     - task: NuGetCommand@2
       displayName: "Push NuGet Packages to NuGet Feed"
       inputs:
         command: push
         nuGetFeedType: external
         publishFeedCredentials: 'nuget.org'
-        versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION_MACOS"
 - job: Build_ubuntu
   displayName: "Build v8 on Ubuntu"
   dependsOn: CheckReleaseStatus
@@ -149,13 +141,9 @@ jobs:
       inputs:
         command: pack
         packagesToPack: "*.nuspec"
-        versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION_UBUNTU"
     - task: NuGetCommand@2
       displayName: "Push NuGet Packages to NuGet Feed"
       inputs:
         command: push
         nuGetFeedType: external
         publishFeedCredentials: 'nuget.org'
-        versioningScheme: byEnvVar
-        versionEnvVar: "V8_VERSION_UBUNTU"
