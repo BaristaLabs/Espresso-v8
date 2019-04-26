@@ -4,14 +4,15 @@ param (
     [string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}})
 )
 
-$path = "$PSScriptRoot/nuget"
+$PSCurrentPath = (Get-Location).Path
+$path = "$PSCurrentPath/nuget"
 Set-Location $path
 
 $PACKAGES = @('v8.ubuntu', 'v8.ubuntu-redist')
 $V8VersionParts = @('V8_MAJOR_VERSION', 'V8_MINOR_VERSION', 'V8_BUILD_NUMBER', 'V8_PATCH_LEVEL')
 
 ### Get v8 version from defines in v8-version.h
-$V8Version = Get-Content "$PSScriptRoot/v8/v8/include/v8-version.h"
+$V8Version = Get-Content "$PSCurrentPath/v8/v8/include/v8-version.h"
 
 $version = @()
 
@@ -22,11 +23,11 @@ foreach($name in $V8VersionParts) {
 $version = [string]::Join('.', $version)
 
 foreach($name in $PACKAGES) {
-	$nuspec = Get-Content "$PSScriptRoot/nuget/$name.nuspec" -Raw
+	$nuspec = Get-Content "$PSCurrentPath/nuget/$name.nuspec" -Raw
 	$nuspec = $nuspec.Replace('$Configuration$',$CONFIGURATION)
 	$nuspec = $nuspec.Replace('$Version$',$version)
-	$nuspecPath = "$PSScriptRoot/BaristaLabs.Espresso.$name-$CONFIGURATION.nuspec"
+	$nuspecPath = "$PSCurrentPath/BaristaLabs.Espresso.$name-$CONFIGURATION.nuspec"
 	Set-Content -Path $nuspecPath -Value $nuspec
 }
 
-Set-Location $PSScriptRoot
+Set-Location $PSCurrentPath

@@ -2,7 +2,7 @@
 /v8*.nupkg
 *.pyc
 *.nupkg
-depot_tools.zip
-/depot_tools
+**/depot_tools.zip
+**/depot_tools
 /*.nuspec
 /*.props

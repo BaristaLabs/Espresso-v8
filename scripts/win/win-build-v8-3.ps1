@@ -5,16 +5,18 @@ param (
 	[string]$STATIC = (&{If([string]::IsNullOrWhiteSpace($env:STATIC)) {"false"} Else {$env:STATIC}})
 )
 
+$PSCurrentPath = (Get-Location).Path
+
 # Set Environment Variables
 # Add depot tools to the path
 $currentPath = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-if (!($currentPath -match ("^" + [regex]::Escape($PSScriptRoot) + "\\depot_tools\\;"))) {
-    $env:Path = "$PSScriptRoot\depot_tools\;" + $currentPath
+if (!($currentPath -match ("^" + [regex]::Escape($PSCurrentPath) + "\\depot_tools\\;"))) {
+    $env:Path = "$PSCurrentPath\depot_tools\;" + $currentPath
 }
 $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
 $env:GYP_MSVS_VERSION=2019
 
-$path = "$PSScriptRoot\v8\v8"
+$path = "$PSCurrentPath\v8\v8"
 $GN_OPTIONS = @(
 	'is_clang=false',
 	'is_component_build=true',
@@ -23,13 +25,11 @@ $GN_OPTIONS = @(
 	'v8_use_external_startup_data=true',
 	'treat_warnings_as_errors=false',
     'use_jumbo_build=true',
-    'enable_nacl=false',
-	'blink_symbol_level=0',
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true'
 )
 
-if ($STATIC == 'true') {
+if ($STATIC -eq 'true') {
 	$GN_OPTIONS = @(
 		'is_component_build=false',
 		'v8_static_library=true',
@@ -63,4 +63,4 @@ $start_time = Get-Date
 autoninja -C "$path\out.gn\$CONFIGURATION" d8
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
-Set-Location $PSScriptRoot
+Set-Location $PSCurrentPath

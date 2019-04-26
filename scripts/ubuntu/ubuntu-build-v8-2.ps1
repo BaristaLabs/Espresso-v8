@@ -4,15 +4,17 @@ param (
     [string]$V8_VERSION = (&{If([string]::IsNullOrWhiteSpace($env:V8_VERSION)) {"7.4.288.25"} Else {$env:V8_VERSION}})
 )
 
+$PSCurrentPath = (Get-Location).Path
+
 # Set Environment Variables
 # Add depot tools to the path
 $currentPath = $env:PATH
-if (!($currentPath -match (":" + [regex]::Escape($PSScriptRoot) + "/depot_tools/$"))) {
-    $env:PATH = $env:PATH + ":$PSScriptRoot/depot_tools/"
+if (!($currentPath -match (":" + [regex]::Escape($PSCurrentPath) + "/depot_tools/$"))) {
+    $env:PATH = $env:PATH + ":$PSCurrentPath/depot_tools/"
 }
 $env:PATH = $env:PATH -replace "~","$HOME"
 
-$path = "$PSScriptRoot\v8"
+$path = "$PSCurrentPath\v8"
 # Fixes fetch error "LookupError: unknown encoding: cp65001"
 $env:PYTHONIOENCODING = "UTF-8"
 
@@ -46,7 +48,7 @@ git checkout $V8_VERSION
 Remove-Item env:GIT_REDIRECT_STDERR
 gclient sync -D
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
-Set-Location $PSScriptRoot
+Set-Location $PSCurrentPath
 
 # Install additional build tools
 Write-Output "Installing additional build tools..."

@@ -1,6 +1,6 @@
 # Determines of a V8 Build needs to occur
 $v8VersionTableUrl = "https://omahaproxy.appspot.com/all?csv=1"
-$response = Invoke-WebRequest $v8VersionTableUrl
+$response = Invoke-WebRequest -Uri $v8VersionTableUrl -UseBasicParsing
 $csv = ConvertFrom-CSV $response.content
 
 $win64Stable = $csv | Where-Object {$_.os -eq "win64" -and $_.channel -eq "stable"} | Select-Object -First 1
@@ -24,7 +24,7 @@ $env:V8_VERSION_UBUNTU = $latestStableVersion_linux
 
 #Determine if there's a newer windows version.
 try { 
-    $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/"
+    $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/" -UseBasicParsing
     $options = [System.Text.RegularExpressions.RegexOptions]::Singleline
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.win-x64.release\s([\d+\.]+).*?</title>", $options)
     $publishedVersion = $rx.Match($response.content).Groups[1].Value
@@ -43,7 +43,7 @@ try {
 
 #Determine if there's a newer macOS version.
 try { 
-    $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.macOS-x64.release/"
+    $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.macOS-x64.release/" -UseBasicParsing
     $options = [System.Text.RegularExpressions.RegexOptions]::Singleline
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.macOS-x64.release\s([\d+\.]+).*?</title>", $options)
     $publishedVersion = $rx.Match($response.content).Groups[1].Value
@@ -63,7 +63,7 @@ try {
 
 #Determine if there's a newer ubuntu version.
 try { 
-    $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.ubuntu-x64.release/"
+    $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.ubuntu-x64.release/" -UseBasicParsing
     $options = [System.Text.RegularExpressions.RegexOptions]::Singleline
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.ubuntu-x64.release\s([\d+\.]+).*?</title>", $options)
     $publishedVersion = $rx.Match($response.content).Groups[1].Value

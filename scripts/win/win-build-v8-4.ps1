@@ -5,18 +5,19 @@ param (
 	[string]$STATIC = (&{If([string]::IsNullOrWhiteSpace($env:STATIC)) {"false"} Else {$env:STATIC}})
 )
 
-$path = "$PSScriptRoot\nuget"
+$PSCurrentPath = (Get-Location).Path
+$path = "$PSCurrentPath\nuget"
 Set-Location $path
 
 $PACKAGES = @('v8.win', 'v8.win-redist', 'v8.win-symbols')
-if ($STATIC == "true") {
+if ($STATIC -eq "true") {
 	$PACKAGES = @('v8-static.win')
 }
 
 $V8VersionParts = @('V8_MAJOR_VERSION', 'V8_MINOR_VERSION', 'V8_BUILD_NUMBER', 'V8_PATCH_LEVEL')
 
 ### Get v8 version from defines in v8-version.h
-$V8Version = Get-Content "$PSScriptRoot\v8\v8\include\v8-version.h"
+$V8Version = Get-Content "$PSCurrentPath\v8\v8\include\v8-version.h"
 
 $version = @()
 
@@ -27,17 +28,17 @@ foreach($name in $V8VersionParts) {
 $version = [string]::Join('.', $version)
 
 foreach($name in $PACKAGES) {
-	$nuspec = Get-Content "$PSScriptRoot\nuget\$name.nuspec" -Raw
+	$nuspec = Get-Content "$PSCurrentPath\nuget\$name.nuspec" -Raw
 	$nuspec = $nuspec.Replace('$Configuration$',$CONFIGURATION)
 	$nuspec = $nuspec.Replace('$Version$',$version)
-	$nuspecPath = "$PSScriptRoot\BaristaLabs.Espresso.$name-$CONFIGURATION.nuspec"
+	$nuspecPath = "$PSCurrentPath\BaristaLabs.Espresso.$name-$CONFIGURATION.nuspec"
 	Set-Content -Path $nuspecPath -Value $nuspec
 
-	$props = Get-Content "$PSScriptRoot\nuget\$name.props" -Raw
+	$props = Get-Content "$PSCurrentPath\nuget\$name.props" -Raw
 	$props = $props.Replace('$Configuration$',$CONFIGURATION)
 	$props = $props.Replace('$Version$',$version)
-	$propsPath = "$PSScriptRoot\BaristaLabs.Espresso.$name-$CONFIGURATION.props"
+	$propsPath = "$PSCurrentPath\BaristaLabs.Espresso.$name-$CONFIGURATION.props"
 	Set-Content -Path $propsPath -Value $props
 }
 
-Set-Location $PSScriptRoot
+Set-Location $PSCurrentPath

@@ -54,6 +54,16 @@ To build V8 and make NuGet packages:
 Simply run through the powershell scripts sequentially for the target environment.
 Use the azure-pipelines.yml as a guide for the inputs.
 
+``` Powershell
+./scripts/checkReleaseStatus # Determine which releases need to be built.
+```
+
+``` Powershell
+./scripts/win/win-build-v8-1.ps # Download v8 Build Dependencies
+./scripts/win/win-build-v8-2.ps -V8_VERSION 7.4.288.25 # Fetch a specific v8 version from source
+./scripts/win/win-build-v8-3.ps # Fetch v8 from source
+```
+
 Once the 4 scripts have been run, package/push using NuGet.
 
 > Note: Visit https://omahaproxy.appspot.com/ for a list of the V8 versions that correspond to a Chrome build.

@@ -4,15 +4,17 @@ param (
     [string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}})
 )
 
+$PSCurrentPath = (Get-Location).Path
+
 # Set Environment Variables
 # Add depot tools to the path
 $currentPath = $env:PATH
-if (!($currentPath -match (":" + [regex]::Escape($PSScriptRoot) + "/depot_tools/$"))) {
-    $env:PATH = $env:PATH + ":$PSScriptRoot/depot_tools/"
+if (!($currentPath -match (":" + [regex]::Escape($PSCurrentPath) + "/depot_tools/$"))) {
+    $env:PATH = $env:PATH + ":$PSCurrentPath/depot_tools/"
 }
 $env:PATH = $env:PATH -replace "~","$HOME"
 
-$path = "$PSScriptRoot/v8/v8"
+$path = "$PSCurrentPath/v8/v8"
 $GN_OPTIONS = @(
 	'is_clang=false',
 	'is_component_build=true',
@@ -45,4 +47,4 @@ $start_time = Get-Date
 autoninja -C "$path/out.gn/$CONFIGURATION" d8
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
-Set-Location $PSScriptRoot
+Set-Location $PSCurrentPath
