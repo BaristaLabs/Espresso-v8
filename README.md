@@ -1,5 +1,4 @@
 # Espresso-v8
----
 
 This package contains scripts and configuration to perform automated multi-platform V8 Builds using Azure DevOps and publish the resulting binaries to NuGet. These pre-built V8 libraries and headers then can be used to embed the V8 JavaScript engine into multi-platform C++ projects.
 
