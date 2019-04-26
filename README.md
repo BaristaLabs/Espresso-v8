@@ -34,9 +34,11 @@ This is not currently true for macOS and Ubuntu using Visual Studio for Mac or o
 
 ## How to build and publish in Azure Devops
 
-Simply fork this repo, reference it in Azure Devops project, create a new YAML build pipeline, select the azure-pipelines.yml file from this repo and build.
+Simply fork this repo, reference it in Azure Devops project, create a new YAML build pipeline, select the azure-pipelines.yml file from this repo and queue a build.
 
-You might want to publish to a private nuget feed or change the package name, those exercises are left to the reader.
+The included pipeline will check for the latest version of v8 against the nuget package name and build, pack and push a new nuget package if outdated. The author of this project uses a nightly trigger to check for new, stable v8 releases and automatically publish new builds.
+
+Consumers of this project might want to change the package name or publish to a private nuget feed, those exercises are left to the reader.
 
 ## How to build and publish in a local dev environment
 
