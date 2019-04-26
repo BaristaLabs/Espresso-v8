@@ -74,3 +74,13 @@ try {
     Write-Output "Unable to determine Published Ubuntu version"
     $env:build_ubuntu = 'true'
 }
+
+# set the multi-job variables
+Write-Output "##vso[task.setvariable variable=V8_VERSION_WINDOWS;isOutput=true]$env:V8_VERSION_WINDOWS"
+Write-Output "##vso[task.setvariable variable=build_windows;isOutput=true]$env:build_windows"
+
+Write-Output "##vso[task.setvariable variable=V8_VERSION_MACOS;isOutput=true]$env:V8_VERSION_MACOS"
+Write-Output "##vso[task.setvariable variable=build_macOS;isOutput=true]$env:build_macOS"
+
+Write-Output "##vso[task.setvariable variable=V8_VERSION_MACOS;isOutput=true]$env:V8_VERSION_UBUNTU"
+Write-Output "##vso[task.setvariable variable=build_macOS;isOutput=true]$env:build_ubuntu"
