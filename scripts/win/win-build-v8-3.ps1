@@ -1,7 +1,8 @@
 # Powershell version of https://chromium.googlesource.com/chromium/src/+/master/docs/windows_build_instructions.md
 # This script builds v8
 param (
-    [string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}})
+    [string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}}),
+	[string]$STATIC = (&{If([string]::IsNullOrWhiteSpace($env:STATIC)) {"false"} Else {$env:STATIC}})
 )
 
 # Set Environment Variables
@@ -27,6 +28,20 @@ $GN_OPTIONS = @(
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true'
 )
+
+if ($STATIC == 'true') {
+	$GN_OPTIONS = @(
+		'is_component_build=false',
+		'v8_static_library=true',
+		'use_custom_libcxx=false',
+		'use_custom_libcxx_for_host=false',
+		'v8_use_external_startup_data=true',
+		'is_clang=false',
+		'treat_warnings_as_errors=false',
+		'symbol_level=1',
+		'v8_enable_fast_mksnapshot=true'
+	)
+}
 
 Set-Location $path
 # Fixes fetch error "LookupError: unknown encoding: cp65001"

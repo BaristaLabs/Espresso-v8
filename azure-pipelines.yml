@@ -8,7 +8,7 @@ jobs:
       name: release_status
       displayName: "Checks release status between stable and published"
       inputs:
-        filePath: "checkReleaseStatus.ps1"
+        filePath: "scripts/checkReleaseStatus.ps1"
       
 - job: Build_VS2019
   displayName: "Build v8 on Windows"
@@ -32,20 +32,20 @@ jobs:
     - task: PowerShell@2
       displayName: "Initialize v8 build environment"
       inputs:
-        filePath: "win-build-v8-1.ps1"
+        filePath: "scripts/win/win-build-v8-1.ps1"
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "win-build-v8-2.ps1"
+        filePath: "scripts/win/win-build-v8-2.ps1"
         arguments:  "-V8_VERSION $(V8_VERSION_WINDOWS)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
-        filePath: "win-build-v8-3.ps1"
+        filePath: "scripts/win/win-build-v8-3.ps1"
     - task: PowerShell@2
       displayName: "Generate NuGet .nuspec files according to specified configuration"
       inputs:
-        filePath: "win-build-v8-4.ps1"
+        filePath: "scripts/win/win-build-v8-4.ps1"
     - task: NuGetCommand@2
       displayName: "Create NuGet Packages"
       inputs:
@@ -81,20 +81,20 @@ jobs:
     - task: PowerShell@2
       displayName: "Initialize v8 build environment"
       inputs:
-        filePath: "macOS-build-v8-1.ps1"
+        filePath: "scripts/macOS/macOS-build-v8-1.ps1"
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "macOS-build-v8-2.ps1"
+        filePath: "scripts/macOS/macOS-build-v8-2.ps1"
         arguments:  "-V8_VERSION $(V8_VERSION_MACOS)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
-        filePath: "macOS-build-v8-3.ps1"
+        filePath: "scripts/macOS/macOS-build-v8-3.ps1"
     - task: PowerShell@2
       displayName: "Generate NuGet .nuspec files according to specified configuration"
       inputs:
-        filePath: "macOS-build-v8-4.ps1"
+        filePath: "scripts/macOS/macOS-build-v8-4.ps1"
     - task: NuGetCommand@2
       displayName: "Create NuGet Packages"
       inputs:
@@ -130,20 +130,20 @@ jobs:
     - task: PowerShell@2
       displayName: "Initialize v8 build environment"
       inputs:
-        filePath: "ubuntu-build-v8-1.ps1"
+        filePath: "scripts/ubuntu/ubuntu-build-v8-1.ps1"
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "ubuntu-build-v8-2.ps1"
+        filePath: "scripts/ubuntu/ubuntu-build-v8-2.ps1"
         arguments:  "-V8_VERSION $(V8_VERSION_UBUNTU)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
-        filePath: "ubuntu-build-v8-3.ps1"
+        filePath: "scripts/ubuntu/ubuntu-build-v8-3.ps1"
     - task: PowerShell@2
       displayName: "Generate NuGet .nuspec files according to specified configuration"
       inputs:
-        filePath: "ubuntu-build-v8-4.ps1"
+        filePath: "scripts/ubuntu/ubuntu-build-v8-4.ps1"
     - task: NuGetCommand@2
       displayName: "Create NuGet Packages"
       inputs:

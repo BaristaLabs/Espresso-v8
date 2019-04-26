@@ -1,13 +1,18 @@
 # Powershell version of https://chromium.googlesource.com/chromium/src/+/master/docs/windows_build_instructions.md
 # This script generates the nuget nuspec files.
 param (
-    [string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}})
+	[string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}}),
+	[string]$STATIC = (&{If([string]::IsNullOrWhiteSpace($env:STATIC)) {"false"} Else {$env:STATIC}})
 )
 
 $path = "$PSScriptRoot\nuget"
 Set-Location $path
 
 $PACKAGES = @('v8.win', 'v8.win-redist', 'v8.win-symbols')
+if ($STATIC == "true") {
+	$PACKAGES = @('v8-static.win')
+}
+
 $V8VersionParts = @('V8_MAJOR_VERSION', 'V8_MINOR_VERSION', 'V8_BUILD_NUMBER', 'V8_PATCH_LEVEL')
 
 ### Get v8 version from defines in v8-version.h
