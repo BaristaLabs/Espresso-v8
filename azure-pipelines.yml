@@ -36,7 +36,8 @@ jobs:
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "win-build-v8-2.ps1 -V8_VERSION $(V8_VERSION_WINDOWS)"
+        filePath: "win-build-v8-2.ps1"
+        arguments:  "-V8_VERSION $(V8_VERSION_WINDOWS)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
@@ -84,7 +85,8 @@ jobs:
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "macOS-build-v8-2.ps1 -V8_VERSION $(V8_VERSION_MACOS)"
+        filePath: "macOS-build-v8-2.ps1"
+        arguments:  "-V8_VERSION $(V8_VERSION_MACOS)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
@@ -132,7 +134,8 @@ jobs:
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "ubuntu-build-v8-2.ps1 -V8_VERSION $(V8_VERSION_UBUNTU)"
+        filePath: "ubuntu-build-v8-2.ps1"
+        arguments:  "-V8_VERSION $(V8_VERSION_UBUNTU)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
