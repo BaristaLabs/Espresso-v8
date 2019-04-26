@@ -37,13 +37,14 @@ if ($arch -eq "ia32") {
 	$platform = "'`$(Platform)' == '$arch'"
 }
 
+#Config is currently unused in the condition
 if ($config -eq "release") {
 	$config = "'`$(Configuration)' == 'Release'"
 } elseif ($config -eq "debug") {
 	$config = "'`$(Configuration)' == 'Debug'"
 }
 
-$condition = "'`$(PlatformToolset)' == 'v142' And $config And $platform"
+$condition = "'`$(PlatformToolset)' == 'v142' And $platform"
 
 foreach($name in $PACKAGES) {
 	$nuspec = Get-Content "$PSCurrentPath\nuget\$name.nuspec" -Raw
