@@ -3,16 +3,17 @@ $v8VersionTableUrl = "https://omahaproxy.appspot.com/all?csv=1"
 $response = Invoke-WebRequest -Uri $v8VersionTableUrl -UseBasicParsing
 $csv = ConvertFrom-CSV $response.content
 
-$win64Stable = $csv | Where-Object {$_.os -eq "win64" -and $_.channel -eq "stable"} | Select-Object -First 1
-$macOSStable = $csv | Where-Object {$_.os -eq "mac" -and $_.channel -eq "stable"} | Select-Object -First 1
-$linuxStable = $csv | Where-Object {$_.os -eq "linux" -and $_.channel -eq "stable"} | Select-Object -First 1
+$channel = "dev"
+$win64Stable = $csv | Where-Object {$_.os -eq "win64" -and $_.channel -eq $channel} | Select-Object -First 1
+$macOSStable = $csv | Where-Object {$_.os -eq "mac" -and $_.channel -eq $channel} | Select-Object -First 1
+$linuxStable = $csv | Where-Object {$_.os -eq "linux" -and $_.channel -eq $channel} | Select-Object -First 1
 
 if ($null -eq $win64Stable -or $null -eq $macOSStable -or $null -eq $linuxStable) {
-    Write-Error "Unable to determine stable version of v8"
+    Write-Error "Unable to determine $channel version of v8"
     exit 1
 }
 
-# Destructure and set variables from the latest stable v8 version numbers.
+# Destructure and set variables from the latest channel v8 version numbers.
 $latestStableVersion_win = $win64Stable.v8_version
 $env:V8_VERSION_WINDOWS = $latestStableVersion_win
 
@@ -30,10 +31,10 @@ try {
     $publishedVersion = $rx.Match($response.content).Groups[1].Value
 
     if ($publishedVersion -lt $latestStableVersion_win) {
-        Write-Output "Windows Build needed. Published: $publishedVersion, Stable: $latestStableVersion_win"
+        Write-Output "Windows Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_win"
         $env:build_windows = 'true'
     } else {
-        Write-Output "Windows Build not needed. Published: $publishedVersion, Stable: $latestStableVersion_win"
+        Write-Output "Windows Build not needed. Published: $publishedVersion, ${channel}: $latestStableVersion_win"
         $env:build_windows = 'false'
     }
 } catch { 
@@ -49,11 +50,11 @@ try {
     $publishedVersion = $rx.Match($response.content).Groups[1].Value
 
     if ($publishedVersion -lt $latestStableVersion_macOS) {
-        Write-Output "macOS Build needed. Published: $publishedVersion, Stable: $latestStableVersion_macOS"
+        Write-Output "macOS Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_macOS"
         
         $env:build_macOS = 'true'
     } else {
-        Write-Output "macOS Build not needed. Published: $publishedVersion, Stable: $latestStableVersion_macOS"
+        Write-Output "macOS Build not needed. Published: $publishedVersion, ${channel}: $latestStableVersion_macOS"
         $env:build_macOS = 'false'
     }
 } catch { 
@@ -69,10 +70,10 @@ try {
     $publishedVersion = $rx.Match($response.content).Groups[1].Value
 
     if ($publishedVersion -lt $latestStableVersion_linux) {
-        Write-Output "Ubuntu Build needed. Published: $publishedVersion, Stable: $latestStableVersion_linux"
+        Write-Output "Ubuntu Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_linux"
         $env:build_ubuntu = 'true'
     } else {
-        Write-Output "Ubuntu Build not needed. Published: $publishedVersion, Stable: $latestStableVersion_linux"
+        Write-Output "Ubuntu Build not needed. Published: $publishedVersion, ${channel}: $latestStableVersion_linux"
         $env:build_ubuntu = 'false'
     }
 } catch { 
