@@ -30,6 +30,7 @@ try {
     }
 } catch { 
     Write-Output "Unable to determine published Windows version"
+    $env:build_windows = 'true'
 }
 
 #Determine if there's a newer macOS version.
@@ -50,6 +51,7 @@ try {
     }
 } catch { 
     Write-Output "Unable to determine published macOS version"
+    $env:build_macOS = 'true'
 }
 
 #Determine if there's a newer ubuntu version.
@@ -70,4 +72,5 @@ try {
     }
 } catch { 
     Write-Output "Unable to determine Published Ubuntu version"
+    $env:build_ubuntu = 'true'
 }
