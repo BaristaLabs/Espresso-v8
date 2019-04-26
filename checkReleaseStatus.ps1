@@ -12,9 +12,18 @@ if ($null -eq $win64Stable -or $null -eq $macOSStable -or $null -eq $linuxStable
     exit 1
 }
 
+# Destructure and set variables from the latest stable v8 version numbers.
+$latestStableVersion_win = $win64Stable.v8_version
+$env:V8_VERSION_WINDOWS = $latestStableVersion_win
+
+$latestStableVersion_macOS = $macOSStable.v8_version
+$env:V8_VERSION_MACOS = $latestStableVersion_macOS
+
+$latestStableVersion_linux = $linuxStable.v8_version
+$env:V8_VERSION_UBUNTU = $latestStableVersion_linux
+
 #Determine if there's a newer windows version.
 try { 
-    $latestStableVersion_win = $win64Stable.v8_version
     $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/"
     $options = [System.Text.RegularExpressions.RegexOptions]::Singleline
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.win-x64.release\s([\d+\.]+).*?</title>", $options)
@@ -22,7 +31,6 @@ try {
 
     if ($publishedVersion -lt $latestStableVersion_win) {
         Write-Output "Windows Build needed. Published: $publishedVersion, Stable: $latestStableVersion_win"
-        $env:V8_VERSION_WINDOWS = $latestStableVersion_win
         $env:build_windows = 'true'
     } else {
         Write-Output "Windows Build not needed. Published: $publishedVersion, Stable: $latestStableVersion_win"
@@ -35,7 +43,6 @@ try {
 
 #Determine if there's a newer macOS version.
 try { 
-    $latestStableVersion_macOS = $macOSStable.v8_version
     $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.macOS-x64.release/"
     $options = [System.Text.RegularExpressions.RegexOptions]::Singleline
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.macOS-x64.release\s([\d+\.]+).*?</title>", $options)
@@ -43,7 +50,7 @@ try {
 
     if ($publishedVersion -lt $latestStableVersion_macOS) {
         Write-Output "macOS Build needed. Published: $publishedVersion, Stable: $latestStableVersion_macOS"
-        $env:V8_VERSION_MACOS = $latestStableVersion_macOS
+        
         $env:build_macOS = 'true'
     } else {
         Write-Output "macOS Build not needed. Published: $publishedVersion, Stable: $latestStableVersion_macOS"
@@ -56,7 +63,6 @@ try {
 
 #Determine if there's a newer ubuntu version.
 try { 
-    $latestStableVersion_linux = $linuxStable.v8_version
     $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/BaristaLabs.Espresso.v8.ubuntu-x64.release/"
     $options = [System.Text.RegularExpressions.RegexOptions]::Singleline
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.ubuntu-x64.release\s([\d+\.]+).*?</title>", $options)
@@ -64,7 +70,6 @@ try {
 
     if ($publishedVersion -lt $latestStableVersion_linux) {
         Write-Output "Ubuntu Build needed. Published: $publishedVersion, Stable: $latestStableVersion_linux"
-        $env:V8_VERSION_UBUNTU = $latestStableVersion_linux
         $env:build_ubuntu = 'true'
     } else {
         Write-Output "Ubuntu Build not needed. Published: $publishedVersion, Stable: $latestStableVersion_linux"
