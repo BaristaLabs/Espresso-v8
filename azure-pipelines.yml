@@ -5,6 +5,7 @@ jobs:
   displayName: "Determines what builds are necessary."
   steps:
     - task: PowerShell@2
+      name: release_status
       displayName: "Checks release status between stable and published"
       inputs:
         filePath: "checkReleaseStatus.ps1"
@@ -12,7 +13,9 @@ jobs:
 - job: Build_VS2019
   displayName: "Build v8 on Windows"
   dependsOn: CheckReleaseStatus
-  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['build_windows'], 'true'))
+  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_windows'], 'true'))
+  variables:
+    V8_VERSION_WINDOWS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_WINDOWS'] ]
   pool:
     vmImage: 'windows-2019'
   strategy:
@@ -60,7 +63,9 @@ jobs:
 - job: Build_macOS
   displayName: "Build v8 on macOS"
   dependsOn: CheckReleaseStatus
-  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['build_macOS'], 'true'))
+  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_macOS'], 'true'))
+  variables:
+    V8_VERSION_MACOS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_MACOS'] ]
   pool:
     vmImage: 'macOS-10.14'
   strategy:
@@ -106,7 +111,9 @@ jobs:
 - job: Build_ubuntu
   displayName: "Build v8 on Ubuntu"
   dependsOn: CheckReleaseStatus
-  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['build_ubuntu'], 'true'))
+  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_ubuntu'], 'true'))
+  variables:
+    V8_VERSION_UBUNTU: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_UBUNTU'] ]
   pool:
     vmImage: 'ubuntu-16.04'
   strategy:
