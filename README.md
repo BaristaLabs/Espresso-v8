@@ -8,7 +8,7 @@ This package contains scripts and configuration to perform automated multi-platf
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
 |V8 Windows x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-ia32.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-ia32.release/)|
 |V8 Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/)|
-|V8 Static x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-static.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-static.win-x64.release/)|
+|V8 Static Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-static.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-static.win-x64.release/)|
 |V8 macOS x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.macOS-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.macOS-x64.release/)|
 |V8 Ubuntu x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.ubuntu-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.ubuntu-x64.release/)|
 
