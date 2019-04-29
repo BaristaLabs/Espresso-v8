@@ -12,11 +12,11 @@
     <description>Debug symbols for V8 JavaScript Engine redistrubutable files.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
     <dependencies>
-      <dependency id="BaristaLabs.Espresso.v8.win-redist-$Configuration$" version="[$version$]" /> 
+      <dependency id="BaristaLabs.Espresso.v8.win-redist-$Configuration$" version="[$Version$]" /> 
     </dependencies>
   </metadata>
   <files>
-    <file src=".\v8\v8\out.gn\$Configuration$\v8*.pdb" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\v8*.pdb" target="lib\$Configuration$\" />
     <file src="BaristaLabs.Espresso.v8.win-symbols-$Configuration$.props" target="build\native" />
     <file src=".\readme.md" target="" />
   </files>

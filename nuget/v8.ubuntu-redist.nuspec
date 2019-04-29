@@ -9,14 +9,14 @@
     <iconUrl>https://github.com/BaristaLabs/BaristaCore/raw/master/Logo.png</iconUrl>
     <license type="expression">BSD-3-Clause</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Prebuild binaries for V8 JavaScript Engine.</description>
+    <description>Pre-built binaries for V8 JavaScript Engine.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
   </metadata>
   <files>
-    <file src=".\v8\v8\out.gn\$Configuration$\libv8*.so" target="lib" />
-    <file src=".\v8\v8\out.gn\$Configuration$\libicu*.so" target="lib" />
-    <file src=".\v8\v8\out.gn\$Configuration$\icu*.dat" target="lib" />
-    <file src=".\v8\v8\out.gn\$Configuration$\*_blob.bin" target="lib" />
+    <file src=".\v8\v8\out.gn\$Configuration$\libv8*.so" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\libicu*.so" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\icu*.dat" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\*_blob.bin" target="lib\$Configuration$\" />
     <file src=".\readme.md" target="" />
   </files>
 </package>
