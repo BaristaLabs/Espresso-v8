@@ -12,7 +12,7 @@
     <description>Developer files (headers/libraries) for V8 JavaScript Engine.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
     <dependencies>
-      <dependency id="BaristaLabs.Espresso.v8.osx-redist-$Configuration$" version="[$Version$]" /> 
+      <dependency id="BaristaLabs.Espresso.v8.macOS-redist-$Configuration$" version="[$Version$]" /> 
     </dependencies>
   </metadata>
   <files>
