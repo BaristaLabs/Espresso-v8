@@ -49,7 +49,6 @@ $env:GIT_REDIRECT_STDERR = '2>&1'
 git fetch
 git checkout $V8_VERSION
 Remove-Item env:GIT_REDIRECT_STDERR
-# cmd.exe /C "PATH $currentPath & gclient sync -D"
-gclient sync -D
+cmd.exe /C "PATH $currentPath & gclient sync"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 Set-Location $PSCurrentPath
