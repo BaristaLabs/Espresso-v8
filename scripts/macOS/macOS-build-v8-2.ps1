@@ -44,6 +44,7 @@ $start_time = Get-Date
 Write-Output "Using V8 Version $V8_VERSION"
 # Redirect standard error messages to null
 $env:GIT_REDIRECT_STDERR = '2>&1'
+git pull
 git checkout $V8_VERSION
 Remove-Item env:GIT_REDIRECT_STDERR
 gclient sync -D

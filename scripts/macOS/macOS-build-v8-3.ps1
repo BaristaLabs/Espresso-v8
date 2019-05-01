@@ -37,7 +37,7 @@ Write-Output "Generating build configuration for $CONFIGURATION to $argsPath..."
 $start_time = Get-Date
 python tools/dev/v8gen.py $CONFIGURATION
 Add-Content $argsPath ($GN_OPTIONS -join "`n")
-Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 #run gn gen
 gn gen "$path/out.gn/$configuration"

@@ -7,13 +7,13 @@ $output = "$PSCurrentPath\depot_tools.zip"
 Write-Output "Downloading depot tools..."
 $start_time = Get-Date
 (New-Object System.Net.WebClient).DownloadFile($url, $output)
-Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 Write-Output "Expanding depot tools..."
 Remove-Item -LiteralPath "$PSCurrentPath\depot_tools\" -Force -Recurse -ErrorAction SilentlyContinue
 $start_time = Get-Date
 Expand-Archive -LiteralPath "$PSCurrentPath\depot_tools.zip" -DestinationPath "$PSCurrentPath\depot_tools\"
-Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 Remove-Item $output
 
