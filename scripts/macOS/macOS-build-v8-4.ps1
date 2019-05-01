@@ -22,6 +22,11 @@ foreach($name in $V8VersionParts) {
 }
 $version = [string]::Join('.', $version)
 
+if(![string]::IsNullOrWhiteSpace($env:OVERRIDE_MACOS_VERSION)) {
+	Write-Output "Overriding NuGet Version: Current Version: $version New Version: $env:OVERRIDE_MACOS_VERSION"
+	$version = $env:OVERRIDE_MACOS_VERSION
+}
+
 foreach($name in $PACKAGES) {
 	$nuspec = Get-Content "$PSCurrentPath/nuget/$name.nuspec" -Raw
 	$nuspec = $nuspec.Replace('$Configuration$',$CONFIGURATION)

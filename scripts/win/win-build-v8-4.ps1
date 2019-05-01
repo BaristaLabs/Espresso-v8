@@ -27,6 +27,11 @@ foreach($name in $V8VersionParts) {
 }
 $version = [string]::Join('.', $version)
 
+if(![string]::IsNullOrWhiteSpace($env:OVERRIDE_WINDOWS_VERSION)) {
+	Write-Output "Overriding NuGet Version: Current Version: $version New Version: $env:OVERRIDE_WINDOWS_VERSION"
+	$version = $env:OVERRIDE_WINDOWS_VERSION
+}
+
 $configParts = $CONFIGURATION.Split(".")
 $arch = $configParts[0]
 $config = $configParts[1]
