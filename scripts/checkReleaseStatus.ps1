@@ -33,6 +33,10 @@ try {
     if ($publishedVersion -lt $latestStableVersion_win) {
         Write-Output "Windows Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_win"
         $env:build_windows = 'true'
+    } elseif(![string]::IsNullOrWhiteSpace($env:FORCE_WINDOWS)) {
+        Write-Output "Windows Build forced. Published: $publishedVersion, Forced: $env:FORCE_WINDOWS"
+        $env:V8_VERSION_WINDOWS = $env:FORCE_WINDOWS
+        $env:build_windows = 'true'
     } else {
         Write-Output "Windows Build not needed. Published: $publishedVersion, ${channel}: $latestStableVersion_win"
         $env:build_windows = 'false'
@@ -53,6 +57,10 @@ try {
         Write-Output "macOS Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_macOS"
         
         $env:build_macOS = 'true'
+    } elseif([string]::IsNullOrWhiteSpace($env:FORCE_MACOS)) {
+        Write-Output "macOS Build forced. Published: $publishedVersion, Forced: $env:FORCE_MACOS"
+        $env:V8_VERSION_MACOS = $env:FORCE_MACOS
+        $env:build_macOS = 'true'
     } else {
         Write-Output "macOS Build not needed. Published: $publishedVersion, ${channel}: $latestStableVersion_macOS"
         $env:build_macOS = 'false'
@@ -71,6 +79,10 @@ try {
 
     if ($publishedVersion -lt $latestStableVersion_linux) {
         Write-Output "Ubuntu Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_linux"
+        $env:build_ubuntu = 'true'
+    } elseif([string]::IsNullOrWhiteSpace($env:FORCE_UBUNTU)) {
+        Write-Output "Ubuntu Build forced. Published: $publishedVersion, Forced: $env:FORCE_UBUNTU"
+        $env:V8_VERSION_UBUNTU = $env:FORCE_UBUNTU
         $env:build_ubuntu = 'true'
     } else {
         Write-Output "Ubuntu Build not needed. Published: $publishedVersion, ${channel}: $latestStableVersion_linux"
