@@ -11,6 +11,7 @@ $PSCurrentPath = (Get-Location).Path
 $currentPath = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 if (!($currentPath -match ("^" + [regex]::Escape($PSCurrentPath) + "\\depot_tools\\;"))) {
     $env:Path = "$PSCurrentPath\depot_tools\;" + $currentPath
+    $currentPath = $env:Path
 }
 $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
 $env:GYP_MSVS_VERSION=2019
