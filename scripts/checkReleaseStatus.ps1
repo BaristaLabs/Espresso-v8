@@ -57,7 +57,7 @@ try {
         Write-Output "macOS Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_macOS"
         
         $env:build_macOS = 'true'
-    } elseif([string]::IsNullOrWhiteSpace($env:FORCE_MACOS)) {
+    } elseif(![string]::IsNullOrWhiteSpace($env:FORCE_MACOS)) {
         Write-Output "macOS Build forced. Published: $publishedVersion, Forced: $env:FORCE_MACOS"
         $env:V8_VERSION_MACOS = $env:FORCE_MACOS
         $env:build_macOS = 'true'
@@ -80,7 +80,7 @@ try {
     if ($publishedVersion -lt $latestStableVersion_linux) {
         Write-Output "Ubuntu Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_linux"
         $env:build_ubuntu = 'true'
-    } elseif([string]::IsNullOrWhiteSpace($env:FORCE_UBUNTU)) {
+    } elseif(![string]::IsNullOrWhiteSpace($env:FORCE_UBUNTU)) {
         Write-Output "Ubuntu Build forced. Published: $publishedVersion, Forced: $env:FORCE_UBUNTU"
         $env:V8_VERSION_UBUNTU = $env:FORCE_UBUNTU
         $env:build_ubuntu = 'true'
