@@ -45,9 +45,9 @@ $start_time = Get-Date
 Write-Output "Using V8 Version $V8_VERSION"
 # Redirect standard error messages to null
 $env:GIT_REDIRECT_STDERR = '2>&1'
-git pull
+git fetch
 git checkout $V8_VERSION
 Remove-Item env:GIT_REDIRECT_STDERR
-cmd.exe /c "gclient sync -D"
+cmd.exe /C "PATH $currentPath & gclient sync -D"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 Set-Location $PSCurrentPath
