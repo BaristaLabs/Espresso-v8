@@ -25,7 +25,7 @@ If(!(test-path $path)) {
     Set-Location $path
     Write-Output "Fetching V8 sources..."
     $start_time = Get-Date
-    fetch --no-history v8
+    cmd.exe /C "fetch --no-history v8"
     Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 }
 Else {

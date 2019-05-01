@@ -30,5 +30,5 @@ $env:GYP_MSVS_VERSION=2019
 # Install/Configure Tools
 Write-Output "Invoking gclient..."
 $start_time = Get-Date
-cmd.exe /c "gclient"
+cmd.exe /C "gclient"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
