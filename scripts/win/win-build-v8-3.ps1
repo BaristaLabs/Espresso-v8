@@ -61,7 +61,7 @@ cmd /C "gn gen ""$path\out.gn\$configuration"""
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
 # autoninja -C "$path\out.gn\$CONFIGURATION" d8
-cmd /C "python tools\dev\gm.py $CONFIGURATION"
+cmd /C "python tools\dev\gm.py ""$path\out.gn\$configuration"""
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
 Set-Location $PSCurrentPath
