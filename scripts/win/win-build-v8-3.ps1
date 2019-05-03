@@ -18,6 +18,7 @@ $env:GYP_MSVS_VERSION=2019
 
 $path = "$PSCurrentPath\v8\v8"
 $GN_OPTIONS = @(
+	# this flag started failing the build only on windows as of 7.5.x
 	# 'is_clang=false',
 	'is_component_build=true',
 	'use_custom_libcxx=false',
