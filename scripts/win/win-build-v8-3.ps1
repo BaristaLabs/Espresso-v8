@@ -51,16 +51,17 @@ $env:PYTHONIOENCODING = "UTF-8"
 $argsPath = "$path\out.gn\$CONFIGURATION\args.gn"
 Write-Output "Generating build configuration for $CONFIGURATION to $argsPath..."
 $start_time = Get-Date
-python tools\dev\v8gen.py $CONFIGURATION
+cmd /C "python tools\dev\v8gen.py $CONFIGURATION"
 Add-Content $argsPath ($GN_OPTIONS -join "`n")
 Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 #run gn gen
-gn gen "$path\out.gn\$configuration"
+cmd /C "gn gen ""$path\out.gn\$configuration"""
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
-autoninja -C "$path\out.gn\$CONFIGURATION" d8
+# autoninja -C "$path\out.gn\$CONFIGURATION" d8
+cmd /C "python tools\dev\gm.py $CONFIGURATION"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
 Set-Location $PSCurrentPath
