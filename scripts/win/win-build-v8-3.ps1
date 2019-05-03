@@ -18,7 +18,7 @@ $env:GYP_MSVS_VERSION=2019
 
 $path = "$PSCurrentPath\v8\v8"
 $GN_OPTIONS = @(
-	'is_clang=false',
+	# 'is_clang=false',
 	'is_component_build=true',
 	'use_custom_libcxx=false',
 	'use_custom_libcxx_for_host=false',
@@ -56,12 +56,11 @@ Add-Content $argsPath ($GN_OPTIONS -join "`n")
 Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 #run gn gen
-cmd /C "gn gen ""$path\out.gn\$configuration"""
+cmd /C "gn gen ""$path\out.gn\$CONFIGURATION"""
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
-# autoninja -C "$path\out.gn\$CONFIGURATION" d8
-cmd /C "python tools\dev\gm.py ""$path\out.gn\$configuration"""
+autoninja -C "$path\out.gn\$CONFIGURATION" d8
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
 Set-Location $PSCurrentPath

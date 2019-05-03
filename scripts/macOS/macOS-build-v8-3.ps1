@@ -40,7 +40,7 @@ Add-Content $argsPath ($GN_OPTIONS -join "`n")
 Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 #run gn gen
-gn gen "$path/out.gn/$configuration"
+gn gen "$path/out.gn/$CONFIGURATION"
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
