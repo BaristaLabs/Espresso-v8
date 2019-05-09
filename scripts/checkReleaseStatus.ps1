@@ -21,7 +21,6 @@ function Compare-VersionNumber {
     $va = Split-VersionNumber -VersionNumber $a
     $vb = Split-VersionNumber -VersionNumber $b
 
-    Write-Output $va
     if ($va.Major -gt $vb.Major -or
         $va.Minor -gt $vb.Minor -or 
         $va.Patch -gt $vb.Patch -or 
