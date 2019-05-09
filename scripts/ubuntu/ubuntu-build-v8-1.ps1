@@ -6,7 +6,7 @@ $PSCurrentPath = (Get-Location).Path
 Write-Output "Cloning depot tools..."
 $start_time = Get-Date
 git clone $url "$PSCurrentPath/depot_tools"
-Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 #touch a metrics.cfg file to supress a warning when invoking gclient
 $metrics = '{"is-googler": false, "countdown": 10, "version": 1, "opt-in": null}'

@@ -18,7 +18,8 @@ $env:GYP_MSVS_VERSION=2019
 
 $path = "$PSCurrentPath\v8\v8"
 $GN_OPTIONS = @(
-	'is_clang=false',
+	# this flag started failing the build only on windows as of 7.5.x
+	# 'is_clang=false',
 	'is_component_build=true',
 	'use_custom_libcxx=false',
 	'use_custom_libcxx_for_host=false',
@@ -51,12 +52,12 @@ $env:PYTHONIOENCODING = "UTF-8"
 $argsPath = "$path\out.gn\$CONFIGURATION\args.gn"
 Write-Output "Generating build configuration for $CONFIGURATION to $argsPath..."
 $start_time = Get-Date
-python tools\dev\v8gen.py $CONFIGURATION
+cmd /C "python tools\dev\v8gen.py $CONFIGURATION"
 Add-Content $argsPath ($GN_OPTIONS -join "`n")
-Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 #run gn gen
-gn gen "$path\out.gn\$configuration"
+cmd /C "gn gen ""$path\out.gn\$CONFIGURATION"""
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date

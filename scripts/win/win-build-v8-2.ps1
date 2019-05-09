@@ -11,6 +11,7 @@ $PSCurrentPath = (Get-Location).Path
 $currentPath = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 if (!($currentPath -match ("^" + [regex]::Escape($PSCurrentPath) + "\\depot_tools\\;"))) {
     $env:Path = "$PSCurrentPath\depot_tools\;" + $currentPath
+    $currentPath = $env:Path
 }
 $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
 $env:GYP_MSVS_VERSION=2019
@@ -24,7 +25,7 @@ If(!(test-path $path)) {
     Set-Location $path
     Write-Output "Fetching V8 sources..."
     $start_time = Get-Date
-    fetch --no-history v8
+    cmd.exe /C "fetch --no-history v8"
     Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 }
 Else {
@@ -45,8 +46,11 @@ $start_time = Get-Date
 Write-Output "Using V8 Version $V8_VERSION"
 # Redirect standard error messages to null
 $env:GIT_REDIRECT_STDERR = '2>&1'
+git fetch
+git rebase-update
+cmd.exe /C "gclient sync -D"
 git checkout $V8_VERSION
 Remove-Item env:GIT_REDIRECT_STDERR
-cmd.exe /c "gclient sync -D"
+
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 Set-Location $PSCurrentPath
