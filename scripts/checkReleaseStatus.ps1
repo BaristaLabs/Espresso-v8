@@ -3,11 +3,10 @@ $v8VersionTableUrl = "https://omahaproxy.appspot.com/all?csv=1"
 $response = Invoke-WebRequest -Uri $v8VersionTableUrl -UseBasicParsing
 $csv = ConvertFrom-CSV $response.content
 
-function splitVersionNumber {
-    Param([string]$versionNumber)
+function Split-VersionNumber {
+    Param([string]$VersionNumber)
 
-    Write-Output($versionNumber)
-    $segments = $versionNumber.Split('.')
+    $segments = $VersionNumber.Split('.')
     
     [hashtable]$result = @{}
     $result.Add('Major', $segments[0])
@@ -17,10 +16,12 @@ function splitVersionNumber {
     return $result
 }
 
-function compareVersionNumber {
+function Compare-VersionNumber {
     Param([string]$a, [string]$b)
-    $va = splitVersionNumber($a)
-    $vb = splitVersionNumber($b)
+    $va = Split-VersionNumber -VersionNumber $a
+    $vb = Split-VersionNumber -VersionNumber $b
+
+    Write-Output $va
     if ($va.Major -gt $vb.Major -or
         $va.Minor -gt $vb.Minor -or 
         $va.Patch -gt $vb.Patch -or 
@@ -57,7 +58,7 @@ try {
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.win-x64.release\s([\d+\.]+).*?</title>", $options)
     $publishedVersion = $rx.Match($response.content).Groups[1].Value
 
-    if (compareVersionNumber($publishedVersion, $latestStableVersion_win) -eq $true) {
+    if ((Compare-VersionNumber -a $publishedVersion -b $latestStableVersion_win) -eq $true) {
         Write-Output "Windows Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_win"
         $env:build_windows = 'true'
     } elseif(![string]::IsNullOrWhiteSpace($env:FORCE_WINDOWS)) {
@@ -80,7 +81,7 @@ try {
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.macOS-x64.release\s([\d+\.]+).*?</title>", $options)
     $publishedVersion = $rx.Match($response.content).Groups[1].Value
 
-    if (compareVersionNumber($publishedVersion, $latestStableVersion_macOS) -eq $true) {
+    if ((Compare-VersionNumber -a $publishedVersion -b $latestStableVersion_macOS) -eq $true) {
         Write-Output "macOS Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_macOS"
         
         $env:build_macOS = 'true'
@@ -104,7 +105,7 @@ try {
     [regex]$rx = [regex]::new("<title>.*?BaristaLabs.Espresso.v8.ubuntu-x64.release\s([\d+\.]+).*?</title>", $options)
     $publishedVersion = $rx.Match($response.content).Groups[1].Value
 
-    if (compareVersionNumber($publishedVersion, $latestStableVersion_linux) -eq $true) {
+    if ((Compare-VersionNumber -a $publishedVersion -b $latestStableVersion_linux) -eq $true) {
         Write-Output "Ubuntu Build needed. Published: $publishedVersion, ${channel}: $latestStableVersion_linux"
         $env:build_ubuntu = 'true'
     } elseif(![string]::IsNullOrWhiteSpace($env:FORCE_UBUNTU)) {
