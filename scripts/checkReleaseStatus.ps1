@@ -9,10 +9,10 @@ function Split-VersionNumber {
     $segments = $VersionNumber.Split('.')
     
     [hashtable]$result = @{}
-    $result.Add('Major', $segments[0])
-    $result.Add('Minor', $segments[1])
-    $result.Add('Patch', $segments[2])
-    $result.Add('Build', $segments[3])
+    $result.Add('Major', ($segments[0] -as [int]))
+    $result.Add('Minor', ($segments[1] -as [int]))
+    $result.Add('Patch', ($segments[2] -as [int]))
+    $result.Add('Build', ($segments[3] -as [int]))
     return $result
 }
 
@@ -21,10 +21,10 @@ function Compare-VersionNumber {
     $va = Split-VersionNumber -VersionNumber $a
     $vb = Split-VersionNumber -VersionNumber $b
 
-    if ($va.Major -gt $vb.Major -or
-        $va.Minor -gt $vb.Minor -or 
-        $va.Patch -gt $vb.Patch -or 
-        $va.Build -gt $vb.Build) {
+    if ($va.Major -lt $vb.Major -or
+        $va.Minor -lt $vb.Minor -or 
+        $va.Patch -lt $vb.Patch -or 
+        $va.Build -lt $vb.Build) {
             return $true
         }
     return $false
