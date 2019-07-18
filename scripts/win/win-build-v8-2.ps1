@@ -47,7 +47,7 @@ Write-Output "Using V8 Version $V8_VERSION"
 $env:GIT_REDIRECT_STDERR = '2>&1'
 cmd.exe /C "git checkout -b ci_branch_$V8_VERSION tags/$V8_VERSION"
 Remove-Item env:GIT_REDIRECT_STDERR
-cmd.exe /C "gclient sync -D"
+gclient sync -D
 
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 Set-Location $PSCurrentPath
