@@ -14,7 +14,7 @@ if (!($currentPath -match ("^" + [regex]::Escape($PSCurrentPath) + "\\depot_tool
     $env:Path = "$PSCurrentPath\depot_tools\;" + $currentPath
 }
 $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
-$env:GYP_MSVS_VERSION=2019
+$env:GYP_MSVS_VERSION = 2019
 
 $path = "$PSCurrentPath\v8\v8"
 $GN_OPTIONS = @(
@@ -61,7 +61,7 @@ cmd /C "gn gen ""$path\out.gn\$CONFIGURATION"""
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
-autoninja -C "$path\out.gn\$CONFIGURATION" d8
+cmd /c "autoninja -C ""$path\out.gn\$CONFIGURATION"" d8"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
 Set-Location $PSCurrentPath

@@ -17,7 +17,7 @@ Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) secon
 
 Remove-Item $output
 
-#touch a metrics.cfg file to supress a warning when invoking gclient
+# touch a metrics.cfg file to supress a warning when invoking gclient
 $metrics = '{"is-googler": false, "countdown": 10, "version": 1, "opt-in": null}'
 Set-Content -Path "$PSCurrentPath\depot_tools\metrics.cfg" -Value $metrics
 
@@ -25,7 +25,7 @@ Set-Content -Path "$PSCurrentPath\depot_tools\metrics.cfg" -Value $metrics
 # Add depot tools to the path
 $env:Path = "$PSCurrentPath\depot_tools\;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
-$env:GYP_MSVS_VERSION=2019
+$env:GYP_MSVS_VERSION = 2019
 
 # Install/Configure Tools
 Write-Output "Invoking gclient..."

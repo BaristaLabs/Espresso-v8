@@ -14,7 +14,7 @@ if (!($currentPath -match ("^" + [regex]::Escape($PSCurrentPath) + "\\depot_tool
     $currentPath = $env:Path
 }
 $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
-$env:GYP_MSVS_VERSION=2019
+$env:GYP_MSVS_VERSION = 2019
 
 $path = "$PSCurrentPath\v8"
 # Fixes fetch error "LookupError: unknown encoding: cp65001"
@@ -25,7 +25,7 @@ If(!(test-path $path)) {
     Set-Location $path
     Write-Output "Fetching V8 sources..."
     $start_time = Get-Date
-    cmd.exe /C "fetch --no-history v8"
+    cmd.exe /C "fetch v8"
     Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 }
 Else {
@@ -35,22 +35,14 @@ Else {
 # Configure Git
 git config --local core.autocrlf false
 git config --local core.filemode false
-git config --local branch.autosetupmerge always
-git config --local branch.autosetuprebase always
-# turn the detached message off
-git config --local advice.detachedHead false
 
+# Get the specified version.
 Set-Location "$path\v8"
 Write-Output "Syncing V8 sources..."
 $start_time = Get-Date
 Write-Output "Using V8 Version $V8_VERSION"
-# Redirect standard error messages to null
-$env:GIT_REDIRECT_STDERR = '2>&1'
-git fetch
-git rebase-update
+cmd.exe /C "git checkout -b ci_branch_$V8_VERSION tags/$V8_VERSION"
 cmd.exe /C "gclient sync -D"
-git checkout $V8_VERSION
-Remove-Item env:GIT_REDIRECT_STDERR
 
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 Set-Location $PSCurrentPath
