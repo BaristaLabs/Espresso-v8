@@ -16,7 +16,7 @@ steps:
       displayName: "Build v8 according to specified configuration"
       inputs:
         filePath: "scripts/win/win-build-v8-3.ps1"
-        arguments:  "-STATIC $(build_windows_static)"
+        arguments:  "-STATIC $(STATIC)"
     - task: PowerShell@2
       displayName: "Generate NuGet .nuspec files according to specified configuration"
       inputs:
