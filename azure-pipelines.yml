@@ -23,38 +23,21 @@ jobs:
       x64:
         CONFIGURATION: 'x64.release'
   steps:
-    - task: NuGetToolInstaller@0
-      displayName: "Ensure a recent version of NuGet"
-      inputs:
-        versionSpec: '4.9.x'
-    - task: PowerShell@2
-      displayName: "Initialize v8 build environment"
-      inputs:
-        filePath: "scripts/win/win-build-v8-1.ps1"
-    - task: PowerShell@2
-      displayName: "Fetch v8 from source for the specified version"
-      inputs:
-        filePath: "scripts/win/win-build-v8-2.ps1"
-        arguments:  "-V8_VERSION $(V8_VERSION_WINDOWS)"
-    - task: PowerShell@2
-      displayName: "Build v8 according to specified configuration"
-      inputs:
-        filePath: "scripts/win/win-build-v8-3.ps1"
-    - task: PowerShell@2
-      displayName: "Generate NuGet .nuspec files according to specified configuration"
-      inputs:
-        filePath: "scripts/win/win-build-v8-4.ps1"
-    - task: NuGetCommand@2
-      displayName: "Create NuGet Packages"
-      inputs:
-        command: pack
-        packagesToPack: "*.nuspec"
-    - task: NuGetCommand@2
-      displayName: "Push NuGet Packages to NuGet Feed"
-      inputs:
-        command: push
-        nuGetFeedType: external
-        publishFeedCredentials: 'nuget.org'
+    - template: templates/windows-build-steps.yml
+- job: Build_VS2019_STATIC
+  displayName: "Build v8 static on Windows"
+  dependsOn: CheckReleaseStatus
+  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_windows_static'], 'true'))
+  variables:
+    V8_VERSION_WINDOWS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_WINDOWS_STATIC'] ]
+  pool:
+    vmImage: 'windows-2019'
+  strategy:
+    matrix:
+      x64:
+        CONFIGURATION: 'x64.release'
+  steps:
+    - template: templates/windows-build-steps.yml
 - job: Build_macOS
   displayName: "Build v8 on macOS"
   dependsOn: CheckReleaseStatus
