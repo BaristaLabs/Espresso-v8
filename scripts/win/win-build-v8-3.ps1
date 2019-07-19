@@ -42,6 +42,7 @@ if ($STATIC -eq 'true') {
 		#'use_custom_libcxx_for_host=false',
 		'v8_use_external_startup_data=true',
 		'treat_warnings_as_errors=false',
+		'use_jumbo_build=true',
 		'symbol_level=1',
 		'v8_enable_fast_mksnapshot=true'
 	)
