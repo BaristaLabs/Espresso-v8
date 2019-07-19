@@ -35,7 +35,7 @@ if ($STATIC -eq 'true') {
 	$GN_OPTIONS = @(
 		# this flag started failing the build only on windows as of 7.5.x
 		#'is_clang=false',
-		#'is_component_build=false',
+		'is_component_build=false',
 		'v8_static_library=true',
 		# these two flags started failing the build on windows as of v7.6.303.20
 		#'use_custom_libcxx=false',
