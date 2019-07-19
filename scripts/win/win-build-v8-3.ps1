@@ -21,8 +21,9 @@ $GN_OPTIONS = @(
 	# this flag started failing the build only on windows as of 7.5.x
 	# 'is_clang=false',
 	'is_component_build=true',
-	'use_custom_libcxx=false',
-	'use_custom_libcxx_for_host=false',
+	# these two flags started failing the build on windows as of v7.6.303.20
+	#'use_custom_libcxx=false',
+	#'use_custom_libcxx_for_host=false',
 	'v8_use_external_startup_data=true',
 	'treat_warnings_as_errors=false',
     'use_jumbo_build=true',
@@ -32,12 +33,14 @@ $GN_OPTIONS = @(
 
 if ($STATIC -eq 'true') {
 	$GN_OPTIONS = @(
-		'is_component_build=false',
+		# this flag started failing the build only on windows as of 7.5.x
+		#'is_clang=false',
+		#'is_component_build=false',
 		'v8_static_library=true',
-		'use_custom_libcxx=false',
-		'use_custom_libcxx_for_host=false',
+		# these two flags started failing the build on windows as of v7.6.303.20
+		#'use_custom_libcxx=false',
+		#'use_custom_libcxx_for_host=false',
 		'v8_use_external_startup_data=true',
-		'is_clang=false',
 		'treat_warnings_as_errors=false',
 		'symbol_level=1',
 		'v8_enable_fast_mksnapshot=true'
@@ -61,7 +64,7 @@ cmd /C "gn gen ""$path\out.gn\$CONFIGURATION"""
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
-cmd /c "autoninja -C ""$path\out.gn\$CONFIGURATION"" d8"
+#cmd /c "autoninja -C ""$path\out.gn\$CONFIGURATION"" d8"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
 Set-Location $PSCurrentPath
