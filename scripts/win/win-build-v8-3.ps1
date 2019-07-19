@@ -64,7 +64,7 @@ cmd /C "gn gen ""$path\out.gn\$CONFIGURATION"""
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
-#cmd /c "autoninja -C ""$path\out.gn\$CONFIGURATION"" d8"
+cmd /c "autoninja -C ""$path\out.gn\$CONFIGURATION"" d8"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
 Set-Location $PSCurrentPath
