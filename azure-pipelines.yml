@@ -30,12 +30,10 @@ jobs:
   condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_windows_static'], 'true'))
   variables:
     V8_VERSION_WINDOWS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_WINDOWS_STATIC'] ]
+    STATIC: $[ dependencies.CheckReleaseStatus.outputs['release_status.build_windows_static'] ]
+    CONFIGURATION: 'x64.release'
   pool:
     vmImage: 'windows-2019'
-  strategy:
-    matrix:
-      x64:
-        CONFIGURATION: 'x64.release'
   steps:
     - template: templates/windows-build-steps.yml
 - job: Build_macOS
