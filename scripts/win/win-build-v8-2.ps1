@@ -35,13 +35,18 @@ Else {
 # Configure Git
 git config --local core.autocrlf false
 git config --local core.filemode false
+# turn the detached message off
+git config --local advice.detachedHead false
 
 # Get the specified version.
 Set-Location "$path\v8"
 Write-Output "Syncing V8 sources..."
 $start_time = Get-Date
 Write-Output "Using V8 Version $V8_VERSION"
+# Redirect standard error messages to null
+$env:GIT_REDIRECT_STDERR = '2>&1'
 cmd.exe /C "git checkout -b ci_branch_$V8_VERSION $V8_VERSION"
+Remove-Item env:GIT_REDIRECT_STDERR
 cmd.exe /C "gclient sync -D"
 
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
