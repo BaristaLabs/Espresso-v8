@@ -7,6 +7,8 @@ $output = "$PSCurrentPath\depot_tools.zip"
 # As of 7.6.303.24, gclicent sync started throwing a 'ERROR: virtualenv is not compatible with this system or executable' in the Azure DevOps environment.
 # The following ensures that python 2.7 is installed
 cmd /C "cinst -y python2 --no-progress"
+cmd /C "cinst -y python2 --no-progress -x86"
+cmd /C "python -m pip install --upgrade pip"
 cmd /C "pip install virtualenv"
 
 Write-Output "Downloading depot tools..."
