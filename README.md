@@ -4,6 +4,8 @@ This package contains scripts and configuration to perform automated multi-platf
 
 > Note: This repository contains dynamic and static V8 builds targeting win-VS2019, macOS, and Ubuntu using a different set of GN_Options used for BaristaLabs.Espresso. See [this repository](https://github.com/pmed/v8-nuget) for different windows-based platform toolsets.
 
+[![Build Status](https://dev.azure.com/baristalabs/Espresso-v8/_apis/build/status/Espresso-v8-CI?branchName=master)](https://dev.azure.com/baristalabs/Espresso-v8/_build/latest?definitionId=3&branchName=master)
+
 | Package                     | Version
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
 |V8 Windows x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-ia32.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-ia32.release/)|
