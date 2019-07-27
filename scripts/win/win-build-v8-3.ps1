@@ -31,7 +31,7 @@ $GN_OPTIONS = @(
 	'v8_enable_fast_mksnapshot=true'
 )
 
-if ($STATIC -eq 'true') {
+if ($null -ne $STATIC -and $STATIC.ToLower() -eq 'true') {
 	$GN_OPTIONS = @(
 		# this flag started failing the build only on windows as of 7.5.x
 		#'is_clang=false',
