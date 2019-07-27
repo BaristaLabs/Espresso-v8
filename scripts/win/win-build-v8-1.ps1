@@ -4,10 +4,6 @@ $url = "https://storage.googleapis.com/chrome-infra/depot_tools.zip"
 $PSCurrentPath = (Get-Location).Path
 $output = "$PSCurrentPath\depot_tools.zip"
 
-# As of 7.6.303.24, gclicent sync started throw a 'ERROR: virtualenv is not compatible with this system or executable' in the Azure DevOps environment.
-# The following ensures that python 3.7 is installed
-cmd /C "choco install python --y"
-
 Write-Output "Downloading depot tools..."
 $start_time = Get-Date
 (New-Object System.Net.WebClient).DownloadFile($url, $output)

@@ -25,7 +25,7 @@ If(!(test-path $path)) {
     Set-Location $path
     Write-Output "Fetching V8 sources..."
     $start_time = Get-Date
-    cmd.exe /C "fetch v8"
+    cmd.exe /C "fetch v8 --nohooks"
     Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 }
 Else {
@@ -47,7 +47,7 @@ Write-Output "Using V8 Version $V8_VERSION"
 $env:GIT_REDIRECT_STDERR = '2>&1'
 cmd.exe /C "git checkout -b ci_branch_$V8_VERSION $V8_VERSION"
 Remove-Item env:GIT_REDIRECT_STDERR
-cmd.exe /C "gclient sync -D"
+cmd.exe /C "gclient sync --delete_unversioned_trees"
 
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 Set-Location $PSCurrentPath
