@@ -1,7 +1,7 @@
 # Powershell version of https://chromium.googlesource.com/chromium/src/+/master/docs/windows_build_instructions.md
 # This script builds v8
 param (
-    [string]$CONFIGURATION = (&{If([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) {"x64.release"} Else {$env:CONFIGURATION}})
+	[string]$CONFIGURATION = (& { If ([string]::IsNullOrWhiteSpace($env:CONFIGURATION)) { "x64.release" } Else { $env:CONFIGURATION } })
 )
 
 $PSCurrentPath = (Get-Location).Path
@@ -10,9 +10,9 @@ $PSCurrentPath = (Get-Location).Path
 # Add depot tools to the path
 $currentPath = $env:PATH
 if (!($currentPath -match (":" + [regex]::Escape($PSCurrentPath) + "/depot_tools/$"))) {
-    $env:PATH = $env:PATH + ":$PSCurrentPath/depot_tools/"
+	$env:PATH = $env:PATH + ":$PSCurrentPath/depot_tools/"
 }
-$env:PATH = $env:PATH -replace "~","$HOME"
+$env:PATH = $env:PATH -replace "~", "$HOME"
 
 $path = "$PSCurrentPath/v8/v8"
 $GN_OPTIONS = @(
@@ -22,7 +22,10 @@ $GN_OPTIONS = @(
 	'use_custom_libcxx_for_host=false',
 	'v8_use_external_startup_data=true',
 	'treat_warnings_as_errors=false',
-        'enable_nacl=false',
+	# Jumbo Builds started failing with 7.9.317.19
+	#'use_jumbo_build=true',
+	# enable_nacl stopped being a build argument with 7.9.317.19
+	#'enable_nacl=false',
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true'
 )

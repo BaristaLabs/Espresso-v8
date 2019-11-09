@@ -23,7 +23,7 @@ If(!(test-path $path)) {
     Set-Location $path
     Write-Output "Fetching V8 sources..."
     $start_time = Get-Date
-    fetch --no-history v8
+    fetch v8
     Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 }
 Else {
@@ -33,8 +33,6 @@ Else {
 # Configure Git
 git config --local core.autocrlf false
 git config --local core.filemode false
-git config --local branch.autosetupmerge always
-git config --local branch.autosetuprebase always
 # turn the detached message off
 git config --local advice.detachedHead false
 
@@ -44,10 +42,9 @@ $start_time = Get-Date
 Write-Output "Using V8 Version $V8_VERSION"
 # Redirect standard error messages to null
 $env:GIT_REDIRECT_STDERR = '2>&1'
-git fetch
-git rebase-update
-gclient sync -D
-git checkout $V8_VERSION
+git checkout -b ci_branch_$V8_VERSION $V8_VERSION
 Remove-Item env:GIT_REDIRECT_STDERR
+gclient sync --delete_unversioned_trees
+
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 Set-Location $PSCurrentPath
