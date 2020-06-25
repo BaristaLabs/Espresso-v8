@@ -8,6 +8,8 @@ $output = "$PSCurrentPath\depot_tools.zip"
 # The following ensures that python 2.7 is not installed
 Remove-Item C:\ProgramData\Chocolatey\bin\python2.7.exe -force
 Remove-Item C:\ProgramData\Chocolatey\bin\python2.exe -force
+Remove-Item C:\hostedtoolcache\windows\Python\3.7.7\x64\python.exe -force
+Remove-Item C:\ProgramData\Chocolatey\bin\python.exe -force
 
 Write-Output "Downloading depot tools..."
 $start_time = Get-Date
