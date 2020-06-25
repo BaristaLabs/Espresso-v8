@@ -15,7 +15,8 @@ jobs:
   variables:
     V8_VERSION_WINDOWS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_WINDOWS'] ]
     STATIC: 'false'
-  pool: devops-builds
+  pool:
+    vmImage: 'windows-2019'
   strategy:
     matrix:
       x86:
