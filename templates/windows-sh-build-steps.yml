@@ -6,11 +6,11 @@ steps:
     - task: PowerShell@2
       displayName: "Initialize v8 build environment"
       inputs:
-        filePath: "scripts/win/win-build-v8-1.ps1"
+        filePath: "scripts/win-self-hosted/win-build-v8-1.ps1"
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "scripts/win-self-hosted/win-build-v8-2.ps1"
+        filePath: "scripts/win/win-build-v8-2.ps1"
         arguments:  "-V8_VERSION $(V8_VERSION_WINDOWS)"
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
