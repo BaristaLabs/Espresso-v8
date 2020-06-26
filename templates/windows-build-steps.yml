@@ -12,6 +12,7 @@ steps:
       inputs:
         filePath: "scripts/win/win-build-v8-2.ps1"
         arguments:  "-V8_VERSION $(V8_VERSION_WINDOWS)"
+        failOnStderr: false
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
