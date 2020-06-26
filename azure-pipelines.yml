@@ -15,8 +15,7 @@ jobs:
   variables:
     V8_VERSION_WINDOWS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_WINDOWS'] ]
     STATIC: 'false'
-  pool:
-    vmImage: 'windows-2019'
+  pool: devops-builds
   strategy:
     matrix:
       x86:
@@ -24,7 +23,7 @@ jobs:
       x64:
         CONFIGURATION: 'x64.release'
   steps:
-    - template: templates/windows-build-steps.yml
+    - template: templates/windows-sh-build-steps.yml
 - job: Build_VS2019_STATIC
   displayName: "Build v8 static on Windows"
   dependsOn: CheckReleaseStatus
@@ -33,10 +32,9 @@ jobs:
     V8_VERSION_WINDOWS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_WINDOWS_STATIC'] ]
     STATIC: $[ dependencies.CheckReleaseStatus.outputs['release_status.build_windows_static'] ]
     CONFIGURATION: 'x64.release'
-  pool:
-    vmImage: 'windows-2019'
+  pool: devops-builds
   steps:
-    - template: templates/windows-build-steps.yml
+    - template: templates/windows-sh-build-steps.yml
 - job: Build_macOS
   displayName: "Build v8 on macOS"
   dependsOn: CheckReleaseStatus
