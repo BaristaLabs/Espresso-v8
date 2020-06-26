@@ -4,6 +4,10 @@ $url = "https://storage.googleapis.com/chrome-infra/depot_tools.zip"
 $PSCurrentPath = (Get-Location).Path
 $output = "$PSCurrentPath\depot_tools.zip"
 
+# Remove NuGet files if they exist
+Remove-Item -Path "$PSCurrentPath\*.nuspec" -Force
+Remove-Item -Path "$PSCurrentPath\*.props" -Force
+
 Write-Output "Downloading depot tools..."
 $start_time = Get-Date
 (New-Object System.Net.WebClient).DownloadFile($url, $output)
