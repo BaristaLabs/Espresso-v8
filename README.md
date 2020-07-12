@@ -47,7 +47,7 @@ Ensure that build dependencies have been are installed in the approprate environ
 
 See the following for a reference: https://v8.dev/docs/build
 
-Also, in windows, install the Windows 10 SDK separately from Visual Studio 2019: https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk
+Also, in windows, install the Windows 10 SDK separately from Visual Studio 2019: https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk (See Note Below))
    
 Ensure the Debugging tools are installed as it is required.
 
@@ -61,10 +61,10 @@ Use the azure-pipelines.yml as a guide for the inputs.
 ```
 
 ``` Powershell
-./scripts/win/win-build-v8-1.ps # Download v8 Build Dependencies
-./scripts/win/win-build-v8-2.ps -V8_VERSION 7.4.288.25 # Fetch a specific v8 version from source
-./scripts/win/win-build-v8-3.ps # Build v8
-./scripts/win/win-build-v8-4.ps # Generate nuspec and props
+./scripts/win-self-hosted/win-build-v8-1.ps1 # Download v8 Build Dependencies
+./scripts/win/win-build-v8-2.ps1 -V8_VERSION 8.3.110.138 # Fetch a specific v8 version from source
+./scripts/win/win-build-v8-3.ps1 # Build v8
+./scripts/win/win-build-v8-4.ps1 # Generate nuspec and props
 ```
 
 Once the 4 scripts have been run, package/push using NuGet.
@@ -75,3 +75,7 @@ nuget push *.nupkg -ApiKey <apikey> -Source https://api.nuget.org/v3/index.json
 ```
 
 > Note: Visit https://omahaproxy.appspot.com/ for a list of the V8 versions that correspond to a Chrome build.
+
+
+> Note: When building on Windows, installing the Windows 10 SDK as part of the Visual Studio 2019 installation is insufficient as it does not include the 'Debugging Tools for Windows' feature
+> Ensure that is included by first removing (the latest) Windows 10 SDK using the Visual Studio 2019 installer then installing the Windows 10 SDK from https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/ ensuring that 'Debugging Tools for Windows' is selected when installing.

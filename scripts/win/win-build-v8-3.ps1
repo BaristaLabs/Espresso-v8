@@ -18,31 +18,26 @@ $env:GYP_MSVS_VERSION = 2019
 
 $path = "$PSCurrentPath\v8\v8"
 $GN_OPTIONS = @(
-	# this flag started failing the build only on windows as of 7.5.x
-	# 'is_clang=false',
-	'is_component_build=true',
-	# these two flags started failing the build on windows as of v7.6.303.20
-	#'use_custom_libcxx=false',
-	#'use_custom_libcxx_for_host=false',
+	# this flag started failing the build only on windows as of 7.5.x - Re-enabled as of 8.3.x as it succeeds when self-hosted
+	'is_clang=false',
 	'v8_use_external_startup_data=true',
 	'treat_warnings_as_errors=false',
-    'use_jumbo_build=true',
+	# Disabling to ensure parity between *nix based builds as of 8.3.x
+    #'use_jumbo_build=true',
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true'
 )
 
 if ($null -ne $STATIC -and $STATIC.ToLower() -eq 'true') {
 	$GN_OPTIONS = @(
-		# this flag started failing the build only on windows as of 7.5.x
-		#'is_clang=false',
+		# this flag started failing the build only on windows as of 7.5.x - Re-enabled as of 8.3.x as it succeeds when self-hosted
+		'is_clang=false',
 		'is_component_build=false',
 		'v8_static_library=true',
-		# these two flags started failing the build on windows as of v7.6.303.20
-		#'use_custom_libcxx=false',
-		#'use_custom_libcxx_for_host=false',
 		'v8_use_external_startup_data=true',
 		'treat_warnings_as_errors=false',
-		'use_jumbo_build=true',
+		# Disabling to ensure parity between *nix based builds
+    	#'use_jumbo_build=true',
 		'symbol_level=1',
 		'v8_enable_fast_mksnapshot=true'
 	)

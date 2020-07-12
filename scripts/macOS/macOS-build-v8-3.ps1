@@ -17,9 +17,6 @@ $env:PATH = $env:PATH -replace "~", "$HOME"
 $path = "$PSCurrentPath/v8/v8"
 $GN_OPTIONS = @(
 	'is_clang=false',
-	'is_component_build=true',
-	'use_custom_libcxx=false',
-	'use_custom_libcxx_for_host=false',
 	'v8_use_external_startup_data=true',
 	'treat_warnings_as_errors=false',
 	# Jumbo Builds started failing with 7.9.317.19
