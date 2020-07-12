@@ -5,7 +5,7 @@ $PSCurrentPath = (Get-Location).Path
 $output = "$PSCurrentPath\depot_tools.zip"
 
 # Clean all tracked and untracked files.
-git clean -fx
+git clean -fxd
 
 Write-Output "Downloading depot tools..."
 $start_time = Get-Date
