@@ -14,6 +14,8 @@ schedules:
 jobs:
 - job: CheckReleaseStatus
   displayName: "Determines what builds are necessary."
+  variables:
+    V8_CHANNEL: stable
   steps:
     - task: PowerShell@2
       name: release_status
