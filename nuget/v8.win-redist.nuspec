@@ -6,18 +6,17 @@
     <authors>The V8 JavaScript Engine Authors</authors>
     <owners>The V8 NuGet package Authors</owners>
     <projectUrl>https://github.com/BaristaLabs/Espresso-v8</projectUrl>
-    <iconUrl>https://github.com/BaristaLabs/BaristaCore/raw/master/Logo.png</iconUrl>
+    <icon>Logo.png</icon>
     <license type="expression">BSD-3-Clause</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Pre-built binaries for V8 JavaScript Engine.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
   </metadata>
   <files>
-    <file src=".\v8\v8\out.gn\$Configuration$\v8*.dll" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\icu*.dll" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\icu*.dat" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\*_blob.bin" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\obj\*.lib" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\icudtl*.dat" target="lib\$Configuration$\" />
     <file src="BaristaLabs.Espresso.v8.win-redist-$Configuration$.props" target="build\native" />
+    <file src=".\Logo.png" target="" />
     <file src=".\readme.md" target="" />
   </files>
 </package>

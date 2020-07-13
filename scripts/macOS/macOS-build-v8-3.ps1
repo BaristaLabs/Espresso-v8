@@ -17,12 +17,10 @@ $env:PATH = $env:PATH -replace "~", "$HOME"
 $path = "$PSCurrentPath/v8/v8"
 $GN_OPTIONS = @(
 	'is_clang=false',
-	'v8_use_external_startup_data=true',
+	'v8_monolithic=true',
+	'v8_static_library=true',
+	'v8_use_external_startup_data=false',
 	'treat_warnings_as_errors=false',
-	# Jumbo Builds started failing with 7.9.317.19
-	#'use_jumbo_build=true',
-	# enable_nacl stopped being a build argument with 7.9.317.19
-	#'enable_nacl=false',
 	'symbol_level=1',
 	'v8_enable_fast_mksnapshot=true'
 )
@@ -43,7 +41,7 @@ gn gen "$path/out.gn/$CONFIGURATION"
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
-autoninja -C "$path/out.gn/$CONFIGURATION" d8
+autoninja -C "$path/out.gn/$CONFIGURATION" v8_monolith
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
 Set-Location $PSCurrentPath
