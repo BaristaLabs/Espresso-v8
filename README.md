@@ -8,9 +8,7 @@ This package contains scripts and configuration to perform automated multi-platf
 
 | Package                     | Version
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|
-|V8 Windows x86 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-ia32.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-ia32.release/)|
-|V8 Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/)|
-|V8 Static Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-static.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-static.win-x64.release/)|
+|V8 Windows x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/)|
 |V8 macOS x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.macOS-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.macOS-x64.release/)|
 |V8 Linux x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.linux-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.linux-x64.release/)|
 
@@ -28,10 +26,12 @@ where
   * `$Version` is the actual V8 version, one of https://chromium.googlesource.com/v8/v8.git/+refs
 
 After successful packages installation add `#include <v8.h>` in a C++ project
-and build it. In Visual Studio 2019, all necessary files (*.lib, *.dll, *.pdb) would be referenced
+and build it. In Visual Studio 2019, all necessary files (*.lib) would be referenced
 in the project automatically with MsBuild property sheets.
 
 This is not currently true for macOS and Linux using Visual Studio for Mac or other IDEs.
+
+As this is a static release build, ensure that /MT is set.
 
 ## How to build and publish in Azure Devops
 
