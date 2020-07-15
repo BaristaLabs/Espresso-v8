@@ -1,23 +1,22 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>BaristaLabs.Espresso.v8.win-symbols-$Configuration$</id>
+    <id>BaristaLabs.Espresso.v8.linux-redist-$Configuration$</id>
     <version>$Version$</version>
     <authors>The V8 JavaScript Engine Authors</authors>
     <owners>The V8 NuGet package Authors</owners>
     <projectUrl>https://github.com/BaristaLabs/Espresso-v8</projectUrl>
-    <iconUrl>https://github.com/BaristaLabs/BaristaCore/raw/master/Logo.png</iconUrl>
+    <icon>Logo.png</icon>
     <license type="expression">BSD-3-Clause</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Debug symbols for V8 JavaScript Engine redistrubutable files.</description>
+    <description>Pre-built binaries for V8 JavaScript Engine.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
-    <dependencies>
-      <dependency id="BaristaLabs.Espresso.v8.win-redist-$Configuration$" version="[$Version$]" /> 
-    </dependencies>
   </metadata>
   <files>
-    <file src=".\v8\v8\out.gn\$Configuration$\v8*.pdb" target="lib\$Configuration$\" />
-    <file src="BaristaLabs.Espresso.v8.win-symbols-$Configuration$.props" target="build\native" />
+    <file src=".\v8\v8\out.gn\$Configuration$\obj\libv8*.a" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\obj\third_party\icu\libicu*.a" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\icudtl*.dat" target="lib\$Configuration$\" />
+    <file src=".\Logo.png" target="" />
     <file src=".\readme.md" target="" />
   </files>
 </package>

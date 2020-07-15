@@ -12,7 +12,7 @@ function Find-NugetPackageVersion {
     try { 
         $response = Invoke-WebRequest -Uri "https://www.nuget.org/packages/$packageName/" -UseBasicParsing
     } catch { 
-        Write-Host "Unable to find nuget package version";
+        Write-Host "Unable to find nuget package $packageName version";
         return $false
     }
 
@@ -66,19 +66,15 @@ if ($null -eq $win64Channel -or $null -eq $macOSChannel -or $null -eq $linuxChan
 
 # Determine if there are published versions that corresponds to the current channel version
 $build_windows = Get-BuildRequired -platform "Windows" -packageName "BaristaLabs.Espresso.v8.win-x64.release" -versionNumber $win64Channel.v8_version -forceEnv "FORCE_WINDOWS" -versionEnv "V8_VERSION_WINDOWS"
-$build_windows_static = Get-BuildRequired -platform "Windows - Static" -packageName "BaristaLabs.Espresso.v8-static.win-x64.release" -versionNumber $win64Channel.v8_version -forceEnv "FORCE_WINDOWS_STATIC" -versionEnv "V8_VERSION_WINDOWS_STATIC"
 $build_macOS = Get-BuildRequired -platform "macOS" -packageName "BaristaLabs.Espresso.v8.macOS-x64.release" -versionNumber $macOSChannel.v8_version -forceEnv "FORCE_MACOS" -versionEnv "V8_VERSION_MACOS"
-$build_ubuntu = Get-BuildRequired -platform "Linux" -packageName "BaristaLabs.Espresso.v8.ubuntu-x64.release" -versionNumber $linuxChannel.v8_version -forceEnv "FORCE_UBUNTU" -versionEnv "V8_VERSION_UBUNTU"
+$build_linux = Get-BuildRequired -platform "Linux" -packageName "BaristaLabs.Espresso.v8.linux-x64.release" -versionNumber $linuxChannel.v8_version -forceEnv "FORCE_LINUX" -versionEnv "V8_VERSION_LINUX"
 
 # set the multi-job variables
 Write-Output "##vso[task.setvariable variable=V8_VERSION_WINDOWS;isOutput=true]$env:V8_VERSION_WINDOWS"
 Write-Output "##vso[task.setvariable variable=build_windows;isOutput=true]$build_windows"
 
-Write-Output "##vso[task.setvariable variable=V8_VERSION_WINDOWS_STATIC;isOutput=true]$env:V8_VERSION_WINDOWS_STATIC"
-Write-Output "##vso[task.setvariable variable=build_windows_static;isOutput=true]$build_windows_static"
-
 Write-Output "##vso[task.setvariable variable=V8_VERSION_MACOS;isOutput=true]$env:V8_VERSION_MACOS"
 Write-Output "##vso[task.setvariable variable=build_macOS;isOutput=true]$build_macOS"
 
-Write-Output "##vso[task.setvariable variable=V8_VERSION_UBUNTU;isOutput=true]$env:V8_VERSION_UBUNTU"
-Write-Output "##vso[task.setvariable variable=build_ubuntu;isOutput=true]$build_ubuntu"
+Write-Output "##vso[task.setvariable variable=V8_VERSION_LINUX;isOutput=true]$env:V8_VERSION_LINUX"
+Write-Output "##vso[task.setvariable variable=build_linux;isOutput=true]$build_linux"

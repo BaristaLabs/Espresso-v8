@@ -2,7 +2,7 @@
 
 This package contains scripts and configuration to perform automated multi-platform V8 Builds using Azure DevOps and publish the resulting binaries to NuGet. These pre-built V8 libraries and headers then can be used to embed the V8 JavaScript engine into multi-platform C++ projects.
 
-> Note: This repository contains dynamic and static V8 builds targeting win-VS2019, macOS, and Ubuntu using a different set of GN_Options used for BaristaLabs.Espresso. See [this repository](https://github.com/pmed/v8-nuget) for different windows-based platform toolsets.
+> Note: This repository contains static monolithic V8 builds targeting win-VS2019, macOS, and linux using a different set of GN_Options used for BaristaLabs.Espresso. See [this repository](https://github.com/pmed/v8-nuget) for different windows-based platform toolsets.
 
 [![Build Status](https://dev.azure.com/baristalabs/Espresso-v8/_apis/build/status/Espresso-v8-CI?branchName=master)](https://dev.azure.com/baristalabs/Espresso-v8/_build/latest?definitionId=3&branchName=master)
 
@@ -12,7 +12,7 @@ This package contains scripts and configuration to perform automated multi-platf
 |V8 Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.win-x64.release/)|
 |V8 Static Windows x64 for Visual Studio 2019|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8-static.win-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8-static.win-x64.release/)|
 |V8 macOS x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.macOS-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.macOS-x64.release/)|
-|V8 Ubuntu x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.ubuntu-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.ubuntu-x64.release/)|
+|V8 Linux x64|[![NuGet](https://img.shields.io/nuget/v/BaristaLabs.Espresso.v8.linux-x64.release.svg)](https://www.nuget.org/packages/BaristaLabs.Espresso.v8.linux-x64.release/)|
 
 ## Usage
 
@@ -31,7 +31,7 @@ After successful packages installation add `#include <v8.h>` in a C++ project
 and build it. In Visual Studio 2019, all necessary files (*.lib, *.dll, *.pdb) would be referenced
 in the project automatically with MsBuild property sheets.
 
-This is not currently true for macOS and Ubuntu using Visual Studio for Mac or other IDEs.
+This is not currently true for macOS and Linux using Visual Studio for Mac or other IDEs.
 
 ## How to build and publish in Azure Devops
 
@@ -60,11 +60,29 @@ Use the azure-pipelines.yml as a guide for the inputs.
 ./scripts/checkReleaseStatus # Determine which releases need to be built.
 ```
 
+#### Windows
+
 ``` Powershell
 ./scripts/win-self-hosted/win-build-v8-1.ps1 # Download v8 Build Dependencies
 ./scripts/win/win-build-v8-2.ps1 -V8_VERSION 8.3.110.138 # Fetch a specific v8 version from source
 ./scripts/win/win-build-v8-3.ps1 # Build v8
 ./scripts/win/win-build-v8-4.ps1 # Generate nuspec and props
+```
+
+#### Linux
+``` Powershell
+./scripts/linux/linux-build-v8-1.ps1 # Download v8 Build Dependencies
+./scripts/linux/linux-build-v8-2.ps1 -V8_VERSION 8.3.110.138 # Fetch a specific v8 version from source
+./scripts/linux/linux-build-v8-3.ps1 # Build v8
+./scripts/linux/linux-build-v8-4.ps1 # Generate nuspec and props
+```
+
+### macOS
+``` Powershell
+./scripts/macOS/macOS-build-v8-1.ps1 # Download v8 Build Dependencies
+./scripts/macOS/macOS-build-v8-2.ps1 -V8_VERSION 8.3.110.138 # Fetch a specific v8 version from source
+./scripts/macOS/macOS-build-v8-3.ps1 # Build v8
+./scripts/macOS/macOS-build-v8-4.ps1 # Generate nuspec and props
 ```
 
 Once the 4 scripts have been run, package/push using NuGet.

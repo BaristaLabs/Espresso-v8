@@ -82,12 +82,12 @@ jobs:
         command: push
         nuGetFeedType: external
         publishFeedCredentials: 'nuget.org'
-- job: Build_ubuntu
-  displayName: "Build v8 on Ubuntu"
+- job: Build_linux
+  displayName: "Build v8 on Linux"
   dependsOn: CheckReleaseStatus
-  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_ubuntu'], 'true'))
+  condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_linux'], 'true'))
   variables:
-    V8_VERSION_UBUNTU: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_UBUNTU'] ]
+    V8_VERSION_LINUX: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_LINUX'] ]
   pool:
     vmImage: 'ubuntu-latest'
   strategy:
@@ -102,23 +102,23 @@ jobs:
     - task: PowerShell@2
       displayName: "Initialize v8 build environment"
       inputs:
-        filePath: "scripts/ubuntu/ubuntu-build-v8-1.ps1"
+        filePath: "scripts/linux/linux-build-v8-1.ps1"
     - task: PowerShell@2
       displayName: "Fetch v8 from source for the specified version"
       inputs:
-        filePath: "scripts/ubuntu/ubuntu-build-v8-2.ps1"
-        arguments:  "-V8_VERSION $(V8_VERSION_UBUNTU)"
+        filePath: "scripts/linux/linux-build-v8-2.ps1"
+        arguments:  "-V8_VERSION $(V8_VERSION_LINUX)"
         errorActionPreference: continue
         ignoreLASTEXITCODE: true
         continueOnError: true # As of 7.5.288.23, Azure DevOps fails to start PHP-FPM as installed as part of Chromium build tools.
     - task: PowerShell@2
       displayName: "Build v8 according to specified configuration"
       inputs:
-        filePath: "scripts/ubuntu/ubuntu-build-v8-3.ps1"
+        filePath: "scripts/linux/linux-build-v8-3.ps1"
     - task: PowerShell@2
       displayName: "Generate NuGet .nuspec files according to specified configuration"
       inputs:
-        filePath: "scripts/ubuntu/ubuntu-build-v8-4.ps1"
+        filePath: "scripts/linux/linux-build-v8-4.ps1"
     - task: NuGetCommand@2
       displayName: "Create NuGet Packages"
       inputs:
