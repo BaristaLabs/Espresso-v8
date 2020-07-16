@@ -5,7 +5,6 @@ $PSCurrentPath = (Get-Location).Path
 $output = "$PSCurrentPath\depot_tools.zip"
 
 # Clean all tracked and untracked files.
-Remove-Item -Path depot_tools -Recurse -Force -ErrorAction Ignore
 Remove-Item -Path v8 -Recurse -Force -ErrorAction Ignore
 git clean -fxd
 

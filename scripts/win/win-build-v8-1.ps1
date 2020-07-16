@@ -2,7 +2,7 @@
 # This script downloads and installs any prerequisites 
 $url = "https://storage.googleapis.com/chrome-infra/depot_tools.zip"
 $PSCurrentPath = (Get-Location).Path
-$output = "$PSCurrentPath\depot_tools.zip"
+$output = "$PSCurrentPath/depot_tools.zip"
 
 # As of 7.6.303.24, gclient sync started throwing a 'ERROR: virtualenv is not compatible with this system or executable' in the Azure DevOps environment.
 # The following ensures that python 2.7 is not installed
@@ -17,16 +17,16 @@ $start_time = Get-Date
 Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 Write-Output "Expanding depot tools..."
-Remove-Item -LiteralPath "$PSCurrentPath\depot_tools\" -Force -Recurse -ErrorAction SilentlyContinue
+Remove-Item -LiteralPath "$PSCurrentPath/depot_tools/" -Force -Recurse -ErrorAction SilentlyContinue
 $start_time = Get-Date
-Expand-Archive -LiteralPath "$PSCurrentPath\depot_tools.zip" -DestinationPath "$PSCurrentPath\depot_tools\"
+Expand-Archive -LiteralPath "$PSCurrentPath/depot_tools.zip" -DestinationPath "$PSCurrentPath/depot_tools/"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time).TotalSeconds) second(s)"
 
 Remove-Item $output
 
 # touch a metrics.cfg file to supress a warning when invoking gclient
 $metrics = '{"is-googler": false, "countdown": 10, "version": 1, "opt-in": null}'
-Set-Content -Path "$PSCurrentPath\depot_tools\metrics.cfg" -Value $metrics
+Set-Content -Path "$PSCurrentPath/depot_tools/metrics.cfg" -Value $metrics
 
 # Set Environment Variables
 # Add depot tools to the path
