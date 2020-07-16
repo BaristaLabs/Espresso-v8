@@ -2,7 +2,7 @@ steps:
     - task: NuGetToolInstaller@0
       displayName: "Ensure a recent version of NuGet"
       inputs:
-        versionSpec: '4.9.x'
+        versionSpec: '5.6.x'
     - task: PowerShell@2
       displayName: "Initialize v8 build environment"
       inputs:
@@ -26,7 +26,17 @@ steps:
       inputs:
         command: pack
         packagesToPack: "*.nuspec"
+    - task: CopyFiles@2
+      inputs:
+        sourceFolder: '$(Build.SourcesDirectory)'
+        contents: '**/$(BuildConfiguration)/**/?(*.nupkg)'
+        targetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: drop
     - task: NuGetCommand@2
+      enabled: 'false'
       displayName: "Push NuGet Packages to NuGet Feed"
       inputs:
         command: push
