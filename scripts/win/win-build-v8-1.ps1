@@ -6,10 +6,10 @@ $output = "$PSCurrentPath\depot_tools.zip"
 
 # As of 7.6.303.24, gclient sync started throwing a 'ERROR: virtualenv is not compatible with this system or executable' in the Azure DevOps environment.
 # The following ensures that python 2.7 is not installed
-Remove-Item C:\ProgramData\Chocolatey\bin\python2.7.exe -force
-Remove-Item C:\ProgramData\Chocolatey\bin\python2.exe -force
-Remove-Item C:\hostedtoolcache\windows\Python\3.7.7\x64\python.exe -force
-Remove-Item C:\ProgramData\Chocolatey\bin\python.exe -force
+Remove-Item C:\ProgramData\Chocolatey\bin\python2.7.exe -force -ErrorAction Ignore
+Remove-Item C:\ProgramData\Chocolatey\bin\python2.exe -force -ErrorAction Ignore
+Remove-Item C:\hostedtoolcache\windows\Python\3.7.7\x64\python.exe -force -ErrorAction Ignore
+Remove-Item C:\ProgramData\Chocolatey\bin\python.exe -force -ErrorAction Ignore
 
 Write-Output "Downloading depot tools..."
 $start_time = Get-Date
