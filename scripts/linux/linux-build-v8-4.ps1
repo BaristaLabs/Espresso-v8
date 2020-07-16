@@ -8,7 +8,7 @@ $PSCurrentPath = (Get-Location).Path
 $path = "$PSCurrentPath/nuget"
 Set-Location $path
 
-$PACKAGES = @('v8.ubuntu', 'v8.ubuntu-redist')
+$PACKAGES = @('v8.linux', 'v8.linux-redist')
 $V8VersionParts = @('V8_MAJOR_VERSION', 'V8_MINOR_VERSION', 'V8_BUILD_NUMBER', 'V8_PATCH_LEVEL')
 
 ### Get v8 version from defines in v8-version.h
@@ -22,9 +22,9 @@ foreach($name in $V8VersionParts) {
 }
 $version = [string]::Join('.', $version)
 
-if(![string]::IsNullOrWhiteSpace($env:OVERRIDE_UBUNTU_VERSION)) {
-	Write-Output "Overriding NuGet Version: Current Version: $version New Version: $env:OVERRIDE_UBUNTU_VERSION"
-	$version = $env:OVERRIDE_UBUNTU_VERSION
+if(![string]::IsNullOrWhiteSpace($env:OVERRIDE_LINUX_VERSION)) {
+	Write-Output "Overriding NuGet Version: Current Version: $version New Version: $env:OVERRIDE_LINUX_VERSION"
+	$version = $env:OVERRIDE_LINUX_VERSION
 }
 
 foreach($name in $PACKAGES) {
