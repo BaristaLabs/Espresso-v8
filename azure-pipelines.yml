@@ -27,8 +27,6 @@ jobs:
   condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_windows'], 'true'))
   variables:
     V8_VERSION_WINDOWS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_WINDOWS'] ]
-    STATIC: 'false'
-  pool: devops-builds
   strategy:
     matrix:
       x86:
@@ -36,7 +34,7 @@ jobs:
       x64:
         CONFIGURATION: 'x64.release'
   steps:
-    - template: templates/windows-sh-build-steps.yml
+    - template: templates/windows-build-steps.yml
 - job: Build_macOS
   displayName: "Build v8 on macOS"
   dependsOn: CheckReleaseStatus
@@ -76,11 +74,6 @@ jobs:
       inputs:
         command: pack
         packagesToPack: "*.nuspec"
-    - task: CopyFiles@2
-      inputs:
-        sourceFolder: '$(Build.SourcesDirectory)'
-        contents: '**/$(BuildConfiguration)/**/?(*.nupkg)'
-        targetFolder: '$(Build.ArtifactStagingDirectory)'
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: '$(Build.ArtifactStagingDirectory)'
@@ -133,11 +126,6 @@ jobs:
       inputs:
         command: pack
         packagesToPack: "*.nuspec"
-    - task: CopyFiles@2
-      inputs:
-        sourceFolder: '$(Build.SourcesDirectory)'
-        contents: '**/$(BuildConfiguration)/**/?(*.nupkg)'
-        targetFolder: '$(Build.ArtifactStagingDirectory)'
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: '$(Build.ArtifactStagingDirectory)'
