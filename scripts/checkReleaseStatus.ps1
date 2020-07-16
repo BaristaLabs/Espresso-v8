@@ -65,9 +65,9 @@ if ($null -eq $win64Channel -or $null -eq $macOSChannel -or $null -eq $linuxChan
 }
 
 # Determine if there are published versions that corresponds to the current channel version
-$build_windows = Get-BuildRequired -platform "Windows" -packageName "BaristaLabs.Espresso.v8-mono.win-x64.release" -versionNumber $win64Channel.v8_version -forceEnv "FORCE_WINDOWS" -versionEnv "V8_VERSION_WINDOWS"
-$build_macOS = Get-BuildRequired -platform "macOS" -packageName "BaristaLabs.Espresso.v8-mono.macOS-x64.release" -versionNumber $macOSChannel.v8_version -forceEnv "FORCE_MACOS" -versionEnv "V8_VERSION_MACOS"
-$build_linux = Get-BuildRequired -platform "Linux" -packageName "BaristaLabs.Espresso.v8-mono.linux-x64.release" -versionNumber $linuxChannel.v8_version -forceEnv "FORCE_LINUX" -versionEnv "V8_VERSION_LINUX"
+$build_windows = Get-BuildRequired -platform "Windows" -packageName "BaristaLabs.Espresso.v8-monolith.win.x64.release" -versionNumber $win64Channel.v8_version -forceEnv "FORCE_WINDOWS" -versionEnv "V8_VERSION_WINDOWS"
+$build_macOS = Get-BuildRequired -platform "macOS" -packageName "BaristaLabs.Espresso.v8-monolith.macOS.x64.release" -versionNumber $macOSChannel.v8_version -forceEnv "FORCE_MACOS" -versionEnv "V8_VERSION_MACOS"
+$build_linux = Get-BuildRequired -platform "Linux" -packageName "BaristaLabs.Espresso.v8-monolith.linux.x64.release" -versionNumber $linuxChannel.v8_version -forceEnv "FORCE_LINUX" -versionEnv "V8_VERSION_LINUX"
 
 # set the multi-job variables
 Write-Output "##vso[task.setvariable variable=V8_VERSION_WINDOWS;isOutput=true]$env:V8_VERSION_WINDOWS"

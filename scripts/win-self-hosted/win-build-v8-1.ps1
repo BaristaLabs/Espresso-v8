@@ -1,7 +1,7 @@
 # Powershell version of https://chromium.googlesource.com/chromium/src/+/master/docs/windows_build_instructions.md
 # This script downloads and installs any prerequisites 
 $url = "https://storage.googleapis.com/chrome-infra/depot_tools.zip"
-$PSCurrentPath = (Get-Location).Path
+$PSCurrentPath = (Split-Path -parent $PSCommandPath)
 $output = "$PSCurrentPath\depot_tools.zip"
 
 # Clean all tracked and untracked files.

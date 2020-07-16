@@ -75,6 +75,7 @@ jobs:
         command: pack
         packagesToPack: "*.nuspec"
     - task: PublishBuildArtifacts@1
+      displayName: "Publish v8 nupkg build artifacts"
       inputs:
         pathToPublish: '$(Build.ArtifactStagingDirectory)'
         artifactName: drop
@@ -127,6 +128,7 @@ jobs:
         command: pack
         packagesToPack: "*.nuspec"
     - task: PublishBuildArtifacts@1
+      displayName: "Publish v8 nupkg build artifacts"
       inputs:
         pathToPublish: '$(Build.ArtifactStagingDirectory)'
         artifactName: drop
