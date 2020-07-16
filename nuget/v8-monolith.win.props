@@ -2,10 +2,14 @@
   <ItemDefinitionGroup Condition="$Condition$">
     <ClCompile>
       <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>_DEBUG;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/DV8_COMPRESS_POINTERS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)..\..\lib\$Configuration$\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>v8_monolith.lib;v8_libbase.lib;v8_libplatform.lib;dbghelp.lib;shlwapi.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)..\..\..\BaristaLabs.Espresso.v8-monolith.win-redist.$Configuration$.$Version$\lib\$Configuration$\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libv8_monolith.lib;libv8_libbase.lib;libv8_libplatform.lib;dbghelp.lib;shlwapi.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
 </Project>
