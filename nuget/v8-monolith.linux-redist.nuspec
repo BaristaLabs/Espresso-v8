@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>BaristaLabs.Espresso.v8.linux-$Configuration$</id>
+    <id>BaristaLabs.Espresso.v8-monolith.linux-redist-$Configuration$</id>
     <version>$Version$</version>
     <authors>The V8 JavaScript Engine Authors</authors>
     <owners>The V8 NuGet package Authors</owners>
@@ -9,15 +9,13 @@
     <icon>Logo.png</icon>
     <license type="expression">BSD-3-Clause</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Developer files (headers/libraries) for V8 JavaScript Engine.</description>
+    <description>Pre-built binaries for V8 JavaScript Engine.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
-    <dependencies>
-      <dependency id="BaristaLabs.Espresso.v8.linux-redist-$Configuration$" version="[$Version$]" /> 
-    </dependencies>
   </metadata>
   <files>
-    <file src=".\v8\v8\include\**\*.h" target="include" />
-    <file src=".\v8\v8\out.gn\$Configuration$\v8_build_config.json" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\obj\libv8*.a" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\obj\third_party\icu\libicu*.a" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\out.gn\$Configuration$\icudtl*.dat" target="lib\$Configuration$\" />
     <file src=".\Logo.png" target="" />
     <file src=".\readme.md" target="" />
   </files>

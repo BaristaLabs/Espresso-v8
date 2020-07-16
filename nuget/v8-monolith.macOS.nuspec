@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>BaristaLabs.Espresso.v8.macOS-redist-$Configuration$</id>
+    <id>BaristaLabs.Espresso.v8-monolith.macOS-$Configuration$</id>
     <version>$Version$</version>
     <authors>The V8 JavaScript Engine Authors</authors>
     <owners>The V8 NuGet package Authors</owners>
@@ -9,14 +9,15 @@
     <icon>Logo.png</icon>
     <license type="expression">BSD-3-Clause</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Pre-built binaries for V8 JavaScript Engine.</description>
+    <description>Developer files (headers/libraries) for V8 JavaScript Engine.</description>
     <tags>V8 javascript embedded native nativepackage</tags>
+    <dependencies>
+      <dependency id="BaristaLabs.Espresso.v8-monolith.macOS-redist-$Configuration$" version="[$Version$]" /> 
+    </dependencies>
   </metadata>
   <files>
-    <file src=".\v8\v8\out.gn\$Configuration$\libv8*.dylib" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\libicu*.dylib" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\icu*.dat" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\*_blob.bin" target="lib\$Configuration$\" />
+    <file src=".\v8\v8\include\**\*.h" target="include" />
+    <file src=".\v8\v8\out.gn\$Configuration$\v8_build_config.json" target="lib\$Configuration$\" />
     <file src=".\Logo.png" target="" />
     <file src=".\readme.md" target="" />
   </files>

@@ -8,7 +8,7 @@ $PSCurrentPath = (Get-Location).Path
 $path = "$PSCurrentPath/nuget"
 Set-Location $path
 
-$PACKAGES = @('v8.linux', 'v8.linux-redist')
+$PACKAGES = @('v8-monolith.linux', 'v8-monolith.linux-redist')
 $V8VersionParts = @('V8_MAJOR_VERSION', 'V8_MINOR_VERSION', 'V8_BUILD_NUMBER', 'V8_PATCH_LEVEL')
 
 ### Get v8 version from defines in v8-version.h
@@ -31,7 +31,7 @@ foreach($name in $PACKAGES) {
 	$nuspec = Get-Content "$PSCurrentPath/nuget/$name.nuspec" -Raw
 	$nuspec = $nuspec.Replace('$Configuration$',$CONFIGURATION)
 	$nuspec = $nuspec.Replace('$Version$',$version)
-	$nuspecPath = "$PSCurrentPath/BaristaLabs.Espresso.$name-$CONFIGURATION.nuspec"
+	$nuspecPath = "$PSCurrentPath/BaristaLabs.Espresso.$name.$CONFIGURATION.nuspec"
 	Set-Content -Path $nuspecPath -Value $nuspec
 }
 

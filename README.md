@@ -64,7 +64,7 @@ Use the azure-pipelines.yml as a guide for the inputs.
 
 ``` Powershell
 ./scripts/win-self-hosted/win-build-v8-1.ps1 # Download v8 Build Dependencies
-./scripts/win/win-build-v8-2.ps1 -V8_VERSION 8.3.110.138 # Fetch a specific v8 version from source
+./scripts/win/win-build-v8-2.ps1 -V8_VERSION 8.4.371.19 # Fetch a specific v8 version from source
 ./scripts/win/win-build-v8-3.ps1 # Build v8
 ./scripts/win/win-build-v8-4.ps1 # Generate nuspec and props
 ```
@@ -72,7 +72,7 @@ Use the azure-pipelines.yml as a guide for the inputs.
 #### Linux
 ``` Powershell
 ./scripts/linux/linux-build-v8-1.ps1 # Download v8 Build Dependencies
-./scripts/linux/linux-build-v8-2.ps1 -V8_VERSION 8.3.110.138 # Fetch a specific v8 version from source
+./scripts/linux/linux-build-v8-2.ps1 -V8_VERSION 8.4.371.19 # Fetch a specific v8 version from source
 ./scripts/linux/linux-build-v8-3.ps1 # Build v8
 ./scripts/linux/linux-build-v8-4.ps1 # Generate nuspec and props
 ```
@@ -80,7 +80,7 @@ Use the azure-pipelines.yml as a guide for the inputs.
 ### macOS
 ``` Powershell
 ./scripts/macOS/macOS-build-v8-1.ps1 # Download v8 Build Dependencies
-./scripts/macOS/macOS-build-v8-2.ps1 -V8_VERSION 8.3.110.138 # Fetch a specific v8 version from source
+./scripts/macOS/macOS-build-v8-2.ps1 -V8_VERSION 8.4.371.19 # Fetch a specific v8 version from source
 ./scripts/macOS/macOS-build-v8-3.ps1 # Build v8
 ./scripts/macOS/macOS-build-v8-4.ps1 # Generate nuspec and props
 ```
