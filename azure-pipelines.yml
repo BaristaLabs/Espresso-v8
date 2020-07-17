@@ -27,6 +27,7 @@ jobs:
   condition: and(succeeded(), eq(dependencies.CheckReleaseStatus.outputs['release_status.build_windows'], 'true'))
   variables:
     V8_VERSION_WINDOWS: $[ dependencies.CheckReleaseStatus.outputs['release_status.V8_VERSION_WINDOWS'] ]
+  pool: 'windows-latest'
   strategy:
     matrix:
       x86:
