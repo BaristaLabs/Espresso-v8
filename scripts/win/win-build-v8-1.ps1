@@ -1,7 +1,7 @@
 # Powershell version of https://chromium.googlesource.com/chromium/src/+/master/docs/windows_build_instructions.md
 # This script downloads and installs any prerequisites 
 $url = "https://storage.googleapis.com/chrome-infra/depot_tools.zip"
-$PSCurrentPath = (Split-Path -parent $PSCommandPath)
+$PSCurrentPath = (Get-Location).Path
 $output = "$PSCurrentPath/depot_tools.zip"
 
 # As of 7.6.303.24, gclient sync started throwing a 'ERROR: virtualenv is not compatible with this system or executable' in the Azure DevOps environment.
