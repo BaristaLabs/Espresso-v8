@@ -17,15 +17,20 @@ $env:PATH = $env:PATH -replace "~", "$HOME"
 $path = "$PSCurrentPath/v8/v8"
 # Tip: Run "cmd /C "gn args --list ""$path\out.gn\$CONFIGURATION""" > options.txt" to list all options
 $GN_OPTIONS = @(
-	'is_clang=false',
-	'v8_monolithic=true',
-	'v8_static_library=true',
-	'v8_use_external_startup_data=false',
-	'use_custom_libcxx=false',
-	'use_custom_libcxx_for_host=false',
-	'treat_warnings_as_errors=false',
-	'symbol_level=1',
-	'v8_enable_fast_mksnapshot=true'
+	'is_debug = false',
+	'is_component_build = false',
+
+	'symbol_level = 1',
+	'treat_warnings_as_errors = false',
+
+	'is_clang = false',
+	'v8_monolithic = true',
+	'v8_static_library = true',
+	'v8_use_external_startup_data = false',
+
+	'use_custom_libcxx = false',
+	'use_custom_libcxx_for_host = false',
+	'v8_enable_fast_mksnapshot = true'
 )
 
 Set-Location $path

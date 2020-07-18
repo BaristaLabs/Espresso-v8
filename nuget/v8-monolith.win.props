@@ -9,7 +9,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)..\..\..\BaristaLabs.Espresso.v8-monolith.win-redist.$Configuration$.$Version$\lib\$Configuration$\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libv8_monolith.lib;libv8_libbase.lib;libv8_libplatform.lib;dbghelp.lib;shlwapi.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libv8_monolith.lib;dbghelp.lib;shlwapi.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
 </Project>

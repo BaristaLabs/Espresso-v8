@@ -14,8 +14,6 @@
   </metadata>
   <files>
     <file src=".\v8\v8\out.gn\$Configuration$\obj\v8_monolith.lib" target="lib\$Configuration$\libv8_monolith.lib" />
-    <file src=".\v8\v8\out.gn\$Configuration$\obj\v8_libbase.lib" target="lib\$Configuration$\libv8_libbase.lib" />
-    <file src=".\v8\v8\out.gn\$Configuration$\obj\v8_libplatform.lib" target="lib\$Configuration$\libv8_libplatform.lib" />
     <file src=".\v8\v8\out.gn\$Configuration$\icudtl*.dat" target="lib\$Configuration$\" />
     <file src="BaristaLabs.Espresso.v8-monolith.win-redist.$Configuration$.props" target="build\native" />
     <file src=".\Logo.png" target="" />

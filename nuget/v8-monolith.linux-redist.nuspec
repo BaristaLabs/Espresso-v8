@@ -14,9 +14,6 @@
   </metadata>
   <files>
     <file src=".\v8\v8\out.gn\$Configuration$\obj\libv8_monolith.a" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\obj\libv8_libbase.a" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\obj\libv8_libplatform.a" target="lib\$Configuration$\" />
-    <file src=".\v8\v8\out.gn\$Configuration$\obj\third_party\icu\libicu*.a" target="lib\$Configuration$\" />
     <file src=".\v8\v8\out.gn\$Configuration$\icudtl*.dat" target="lib\$Configuration$\" />
     <file src=".\Logo.png" target="" />
     <file src=".\readme.md" target="" />
