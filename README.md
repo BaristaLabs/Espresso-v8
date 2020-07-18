@@ -99,5 +99,3 @@ nuget push *.nupkg -ApiKey <apikey> -Source https://api.nuget.org/v3/index.json
 > Note: When building on Windows, installing the Windows 10 SDK as part of the Visual Studio 2019 installation is insufficient as it does not include the 'Debugging Tools for Windows' feature
 > Ensure that is included by first removing (the latest) Windows 10 SDK using the Visual Studio 2019 installer then installing the Windows 10 SDK from https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/ ensuring that 'Debugging Tools for Windows' is selected when installing.
 
-Add ```cmd /C "gn args --list ""$path\out.gn\$CONFIGURATION""" > options.txt to list all options
-To list all targets add ```-t targets all```

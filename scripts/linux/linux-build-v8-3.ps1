@@ -15,6 +15,7 @@ if (!($currentPath -match (":" + [regex]::Escape($PSCurrentPath) + "/depot_tools
 $env:PATH = $env:PATH -replace "~", "$HOME"
 
 $path = "$PSCurrentPath/v8/v8"
+# Tip: Run "cmd /C "gn args --list ""$path\out.gn\$CONFIGURATION""" > options.txt" to list all options
 $GN_OPTIONS = @(
 	'is_clang=false',
 	'v8_monolithic=true',
@@ -26,7 +27,7 @@ $GN_OPTIONS = @(
 
 Set-Location $path
 
-#Tip: Run "python tools/dev/v8gen.py list" to see a list of possible build configurations.
+# Tip: Run "python tools/dev/v8gen.py list" to see a list of possible build configurations.
 $argsPath = "$path/out.gn/$CONFIGURATION/args.gn"
 Write-Output "Generating build configuration for $CONFIGURATION to $argsPath..."
 $start_time = Get-Date
@@ -39,6 +40,7 @@ gn gen "$path/out.gn/$CONFIGURATION"
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
+# Tip: Run "autoninja -C "$path/out.gn/$CONFIGURATION" -t targets all > output.txt" to list all targets
 autoninja -C "$path/out.gn/$CONFIGURATION" v8_monolith
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 

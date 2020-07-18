@@ -16,6 +16,7 @@ $env:DEPOT_TOOLS_WIN_TOOLCHAIN = 0
 $env:GYP_MSVS_VERSION = 2019
 
 $path = "$PSCurrentPath\v8\v8"
+# Tip: Run "cmd /C "gn args --list ""$path\out.gn\$CONFIGURATION""" > options.txt" to list all options
 $GN_OPTIONS = @(
 	'is_clang=false',
 	'v8_monolithic=true',
@@ -30,7 +31,7 @@ Set-Location $path
 # Fixes fetch error "LookupError: unknown encoding: cp65001"
 $env:PYTHONIOENCODING = "UTF-8"
 
-#Tip: Run "python tools\dev\v8gen.py list" to see a list of possible build configurations.
+# Tip: Run "python tools\dev\v8gen.py list" to see a list of possible build configurations.
 $argsPath = "$path\out.gn\$CONFIGURATION\args.gn"
 Write-Output "Generating build configuration for $CONFIGURATION to $argsPath..."
 $start_time = Get-Date
@@ -43,6 +44,7 @@ cmd /C "gn gen ""$path\out.gn\$CONFIGURATION"""
 
 Write-Output "Building $CONFIGURATION..."
 $start_time = Get-Date
+# Tip: Run "autoninja -C "$path/out.gn/$CONFIGURATION" -t targets all > output.txt" to list all targets
 cmd /c "autoninja -C ""$path\out.gn\$CONFIGURATION"" v8_monolith"
 Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
 
