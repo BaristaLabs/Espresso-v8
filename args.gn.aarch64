@@ -1,0 +1,26 @@
+target_cpu = "arm64"
+v8_target_cpu = "arm64"
+
+is_cfi = false
+is_debug = false
+is_component_build = false
+use_gold = false
+use_goma = false
+goma_dir = "None"
+
+symbol_level = 0
+strip_debug_info = true
+treat_warnings_as_errors = false
+
+is_clang = false
+use_sysroot=false
+v8_monolithic = true
+v8_use_external_startup_data = false
+v8_enable_i18n_support = false
+
+v8_enable_fast_mksnapshot = true
+v8_enable_backtrace = true
+v8_enable_disassembler = true
+v8_enable_object_print = true
+v8_enable_verify_heap = true
+v8_untrusted_code_mitigations = false

@@ -23,7 +23,7 @@ $env:PYTHONIOENCODING = "UTF-8"
 If(!(test-path $path)) {
     New-Item -ItemType Directory -Force -Path $path
     Set-Location $path
-    Write-Output "Fetching V8 sources..."
+    Write-Output "Fetching V8 $V8_VERSION sources..."
     $start_time = Get-Date
     cmd.exe /C "fetch v8"
     Write-Output "Time taken: $((Get-Date).Subtract($start_time))"
@@ -40,7 +40,7 @@ git config --local advice.detachedHead false
 
 # Get the specified version.
 Set-Location "$path\v8"
-Write-Output "Syncing V8 sources..."
+Write-Output "Syncing V8 $V8_VERSION sources..."
 $start_time = Get-Date
 Write-Output "Using V8 Version $V8_VERSION"
 # Redirect standard error messages to null
