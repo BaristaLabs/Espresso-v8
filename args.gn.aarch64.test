@@ -1,0 +1,11 @@
+target_cpu = "arm64"
+v8_target_cpu = "arm64"
+
+is_debug = false
+is_component_build = false
+
+treat_warnings_as_errors = false
+
+is_clang = false
+
+v8_enable_fast_mksnapshot = true
