@@ -2,7 +2,7 @@
 
 This package contains scripts and configuration to perform automated multi-platform V8 Builds using Azure DevOps and publish the resulting binaries to NuGet. These pre-built V8 libraries and headers then can be used to embed the V8 JavaScript engine into multi-platform C++ projects.
 
-> Note: This repository contains static monolithic V8 builds targeting win-VS2019, macOS, and linux using a different set of GN_Options used for BaristaLabs.Espresso. See [this repository](https://github.com/pmed/v8-nuget) for different windows-based platform toolsets.
+> Note: This repository contains V8 targeting win-VS2019, macOS, and linux on various platforms using a different set of GN_Options used for BaristaLabs.Espresso which may change over time. See [this repository](https://github.com/pmed/v8-nuget) for different windows-based platform toolsets.
 
 [![Build Status](https://dev.azure.com/baristalabs/Espresso-v8/_apis/build/status/Espresso-v8-CI?branchName=master)](https://dev.azure.com/baristalabs/Espresso-v8/_build/latest?definitionId=3&branchName=master)
 
@@ -99,3 +99,4 @@ nuget push *.nupkg -ApiKey <apikey> -Source https://api.nuget.org/v3/index.json
 > Note: When building on Windows, installing the Windows 10 SDK as part of the Visual Studio 2019 installation is insufficient as it does not include the 'Debugging Tools for Windows' feature
 > Ensure that is included by first removing (the latest) Windows 10 SDK using the Visual Studio 2019 installer then installing the Windows 10 SDK from https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/ ensuring that 'Debugging Tools for Windows' is selected when installing.
 
+> Note: When building with Docker on Windows, ensure that Hyper-V isolation is used over WSL2 and a good amount of cpus and ram is allocated in the docker settings - or, possibly it is possible to use WSL2 mode but  the number of CPUs with --cpus=4 - ancedontally on at 16 core windows machine with docker in linux mode, the v8 build process runs out of memory around step 450 of a d8 build, the message is ```internal compiler error: Killed (program cc1plus)```

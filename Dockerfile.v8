@@ -15,6 +15,8 @@ RUN apt-get update \
         tar \
         xz-utils
 
+RUN git config --global core.symlinks true
+
 # Downloads and install V8 prerequisites 
 ENV DepotToolsUrl="https://chromium.googlesource.com/chromium/tools/depot_tools.git"
 
@@ -35,6 +37,7 @@ FROM --platform=${TARGETPLATFORM} ${BASE_IMAGE} as builder
 
 ARG V8_VERSION
 ARG V8_ARCH
+ARG V8_TARGET
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
@@ -42,32 +45,41 @@ RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
+        bzip2 \
         build-essential \
         bison \
         flex \
+        curl \
+        git \
+        python \
+        tar \
+        xz-utils \
+        binfmt-support \
+        jq \
+        gcc \
         g++ \
+        libncurses5-dev \
         clang \
         llvm \
         libglib2.0-dev \
-        curl \
-        jq \
-        git \
         libcurl4 \
         libicu60 \
         libunwind8 \
         lsb-release \
-        python \
         netcat \
         zip \
         unzip \
-        xz-utils \
         pkg-config -yqq \
-        nano
+        nano \
+        qemu \
+        qemu-user \
+        qemu-user-binfmt
 
 RUN mkdir /build
 WORKDIR /build
 
 # Build Ninja
+RUN git config --global core.symlinks true
 RUN git clone https://github.com/ninja-build/ninja.git -b v1.8.2 \
     && cd ninja \
     && ./configure.py --bootstrap
@@ -101,13 +113,26 @@ COPY --from=source /v8/ /build/v8/
 RUN cd v8 \
     && git checkout ${V8_VERSION}
 
+# Attempt to fix clang++
+RUN rm /build/v8/third_party/llvm-build/Release+Asserts/bin/clang++ && \
+    ln -s /usr/bin/clang++ /build/v8/third_party/llvm-build/Release+Asserts/bin/clang++
+
 # Copy in patches
-COPY patches/${V8_ARCH}/ /build/
+COPY ./patches/${V8_ARCH}/ /build/
 
 # Build
-RUN mkdir -p /bin/v8/out/v8.release/
+RUN cd v8 \
+    && gn gen out/v8.release
+
 COPY args.gn.${V8_ARCH} /build/v8/out/v8.release/args.gn
+COPY BUILD.gn /build/v8/out/v8.release/BUILD.gn
+# Tell GN about our custom target
+RUN echo 'group("espresso") { \n\
+  deps = [\n\
+    "//out/v8.release",\n\
+  ]\n\
+} \n' >> /build/v8/BUILD.gn
 
 RUN cd v8 \
-    && gn gen out/v8.release \
-    && /build/ninja/ninja -C out/v8.release d8
+    && /build/ninja/ninja -C out/v8.release ${V8_TARGET}
+RUN readelf -h /build/v8/out/v8.release/v8.a > elf.txt
