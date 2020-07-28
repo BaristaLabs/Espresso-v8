@@ -84,7 +84,7 @@ nuget push *.nupkg -ApiKey <apikey> -Source https://api.nuget.org/v3/index.json
 ```
 ### Linux
 
-To facilitate building v8 binaries for a multitude of platforms (arm, aarch64, etc...), Linux v8 builds are now entirely container-based.
+To facilitate building v8 binaries for a multitude of platforms (arm, aarch64, etc...), Linux v8 builds are now entirely container-based to allow for cross-compilation from a single platform.
 
 A Makefile describes the available tasks. By default, the makefile targets a V8 build for aarch64, ubuntu, monolithic (single static library) build.
 
@@ -92,7 +92,9 @@ A Makefile describes the available tasks. By default, the makefile targets a V8 
 make build
 ```
 
-Other commands include make push, make publish. See make help for additional details.
+Other commands include make push, make publish.
+See make help for additional details.
+
 
 > Note: Visit https://omahaproxy.appspot.com/ for a list of the V8 versions that correspond to a Chrome build.
 
