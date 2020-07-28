@@ -1,10 +1,15 @@
+# V8 Version Number
 V8_VERSION ?= 8.4.371.19
-V8_TARGET ?= v8_monolith # d8...
+# V8 Build Target - v8_monolith, d8, etc... gn --list targets will show the list
+V8_TARGET ?= v8_monolith
 
-TARGET_PLATFORM ?= linux #linux - for macOS use pwsh
-TARGET_ARCH ?= aarch64 #x86, x64, armv7hf, aarch64...
+# Target Platform - for Windows, ensure Docker is in windows container mode. For macOS, the powershell build scripts is the only way, sadly.
+TARGET_PLATFORM ?= linux
+# Target CPU Architecture - #x86, x64, armv7hf, aarch64...
+TARGET_ARCH ?= aarch64
 
-BASE_IMAGE ?= "balenalib/aarch64-ubuntu:bionic" # ubuntu:bionic, balenalib/armv7hf-ubuntu:bionic, balenalib/aarch64-ubuntu:bionic, 
+# The desired based image - ubuntu:bionic, balenalib/armv7hf-ubuntu:bionic, balenalib/aarch64-ubuntu:bionic, 
+BASE_IMAGE ?= "balenalib/aarch64-ubuntu:bionic"
 IMAGE_PREFIX ?= baristalabs/espresso-v8
 IMAGE_TARGET_NAME ?= monolith
 
