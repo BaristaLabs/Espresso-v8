@@ -69,15 +69,6 @@ Use the azure-pipelines.yml as a guide for the inputs.
 ./scripts/win/win-build-v8-3.ps1 # Build v8
 ./scripts/win/win-build-v8-4.ps1 # Generate nuspec and props
 ```
-
-#### Linux
-``` Powershell
-./scripts/linux/linux-build-v8-1.ps1 # Download v8 Build Dependencies
-./scripts/linux/linux-build-v8-2.ps1 -V8_VERSION 8.4.371.19 # Fetch a specific v8 version from source
-./scripts/linux/linux-build-v8-3.ps1 # Build v8
-./scripts/linux/linux-build-v8-4.ps1 # Generate nuspec and props
-```
-
 ### macOS
 ``` Powershell
 ./scripts/macOS/macOS-build-v8-1.ps1 # Download v8 Build Dependencies
@@ -85,13 +76,23 @@ Use the azure-pipelines.yml as a guide for the inputs.
 ./scripts/macOS/macOS-build-v8-3.ps1 # Build v8
 ./scripts/macOS/macOS-build-v8-4.ps1 # Generate nuspec and props
 ```
-
 Once the 4 scripts have been run, package/push using NuGet.
 
 ``` Powershell
 nuget pack
 nuget push *.nupkg -ApiKey <apikey> -Source https://api.nuget.org/v3/index.json
 ```
+### Linux
+
+To facilitate building v8 binaries for a multitude of platforms (arm, aarch64, etc...), Linux v8 builds are now entirely container-based.
+
+A Makefile describes the available tasks. By default, the makefile targets a V8 build for aarch64, ubuntu, monolithic (single static library) build.
+
+``` sh
+make build
+```
+
+Other commands include make push, make publish. See make help for additional details.
 
 > Note: Visit https://omahaproxy.appspot.com/ for a list of the V8 versions that correspond to a Chrome build.
 
@@ -99,6 +100,6 @@ nuget push *.nupkg -ApiKey <apikey> -Source https://api.nuget.org/v3/index.json
 > Note: When building on Windows, installing the Windows 10 SDK as part of the Visual Studio 2019 installation is insufficient as it does not include the 'Debugging Tools for Windows' feature
 > Ensure that is included by first removing (the latest) Windows 10 SDK using the Visual Studio 2019 installer then installing the Windows 10 SDK from https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/ ensuring that 'Debugging Tools for Windows' is selected when installing.
 
-> Note: When building with Docker on Windows, ensure that Hyper-V isolation is used over WSL2 and a good amount of cpus and ram is allocated in the docker settings - or, possibly it is possible to use WSL2 mode but the number of CPUs with --cpus=4 - ancedontally on at 16 core windows machine with docker in linux mode, the v8 build process runs out of memory around step 450 of a d8 build, the message is ```internal compiler error: Killed (program cc1plus)```
+> Note: When building Linux binaries Docker on Windows, ensure that Hyper-V isolation is used over WSL2 and a good amount of cpus and ram is allocated proportionally to the number of CPUs in the docker settings - or, possibly it is possible to use WSL2 mode but the number of CPUs with --cpus=4 - ancedontally on at 16 core windows machine with docker in linux mode, the v8 build process runs out of memory around step 450 of a d8 build, the message is ```internal compiler error: Killed (program cc1plus)```
 
-> Note: When building with Docker on Mac, ensure that RAM is allocated proportionally to the number of CPUs allocated. Build succeeds on a MBP 16" with 4CPU and 16GB. When it fails, a similar error is reported with cc1plus being killed.
+> Note: When building with Docker on Mac, ensure that RAM is also allocated proportionally to the number of CPUs allocated. Build succeeds on a MBP 16" with 4CPU and 16GB. When it fails, a similar error is reported with cc1plus being killed.
