@@ -16,7 +16,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src=".\v8\v8\include\**\*.h" target="include" />
+    <file src=".\v8\v8\include\**\*" target="include" />
     <file src=".\v8\v8\out.gn\$Configuration$\v8_build_config.json" target="lib\$Configuration$\" />
     <file src="BaristaLabs.Espresso.v8-monolith.win.$Configuration$.props" target="build\native" />
     <file src=".\Logo.png" target="" />

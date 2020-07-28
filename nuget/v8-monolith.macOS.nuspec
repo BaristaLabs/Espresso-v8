@@ -16,7 +16,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src=".\v8\v8\include\**\*.h" target="include" />
+    <file src=".\v8\v8\include\**\*" target="include" />
     <file src=".\v8\v8\out.gn\$Configuration$\v8_build_config.json" target="lib\$Configuration$\" />
     <file src=".\Logo.png" target="" />
     <file src=".\readme.md" target="" />
