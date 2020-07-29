@@ -41,6 +41,7 @@ push:
 publish:
 	docker create -ti --name dummy $(IMAGE_PREFIX)-monolith-aarch64:$(V8_VERSION) bash
 	docker cp dummy:/build/v8/out/v8.release/ ./bin/$(TARGET_ARCH)/
+	docker cp dummy:/build/libv8_monolith_elf.txt ./bin/$(TARGET_ARCH)/
 	docker cp dummy:/build/v8/include/ ./bin/$(TARGET_ARCH)/
 	docker rm -f dummy
 
