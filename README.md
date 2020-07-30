@@ -96,9 +96,10 @@ Other commands include make push, make publish.
 
 See make help for additional details.
 
-Additional arch configurations:
+Additional target configurations:
 
  - ```make build TARGET_ARCH=x64 BASE_IMAGE="ubuntu:bionic" IMAGE_ARCH_NAME=x64```
+ - ```make build TARGET_STAGE=binaries IMAGE_TAG_SUFFIX=-lib```
 
 
 > Note: Visit https://omahaproxy.appspot.com/ for a list of the V8 versions that correspond to a Chrome build.

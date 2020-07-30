@@ -36,7 +36,7 @@ help:
 	@echo
 
 build:
-	docker build -f ./Dockerfile.linux --target $(TARGET_STAGE) -t $(IMAGE_PREFIX)-$(IMAGE_ARCH_NAME)-$(IMAGE_DISTRO)-$(IMAGE_TARGET_NAME):$(V8_VERSION) --build-arg BASE_IMAGE=$(BASE_IMAGE) --build-arg V8_ARCH=$(TARGET_ARCH) --build-arg V8_VERSION=$(V8_VERSION) --build-arg V8_TARGET=$(V8_TARGET) --build-arg TARGETPLATFORM=$(TARGET_PLATFORM)/$(TARGET_ARCH) .
+	docker build -f ./Dockerfile.linux --target $(TARGET_STAGE) -t $(IMAGE_PREFIX)-$(IMAGE_ARCH_NAME)-$(IMAGE_DISTRO)-$(IMAGE_TARGET_NAME):$(V8_VERSION)$(IMAGE_TAG_SUFFIX) --build-arg BASE_IMAGE=$(BASE_IMAGE) --build-arg V8_ARCH=$(TARGET_ARCH) --build-arg V8_VERSION=$(V8_VERSION) --build-arg V8_TARGET=$(V8_TARGET) --build-arg TARGETPLATFORM=$(TARGET_PLATFORM)/$(TARGET_ARCH) .
 
 build-binaries: TARGET_STAGE=binaries
 build-binaries: IMAGE_TAG_SUFFIX=-binaries

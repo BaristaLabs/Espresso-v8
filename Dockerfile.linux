@@ -138,6 +138,6 @@ FROM --platform=${TARGETPLATFORM} ${BASE_IMAGE} as binaries
 
 # Copy built/generated artifacts
 
-COPY --from=source /build/v8/obj/*.a /v8/
-COPY --from=source /build/libv8_monolith_elf.txt /v8/
-COPY --from=source /build/v8/include/ /v8/include/
+COPY --from=builder /build/v8/out/v8.release/obj/*.a /v8/
+COPY --from=builder /build/libv8_monolith_elf.txt /v8/
+COPY --from=builder /build/v8/include/ /v8/include/
