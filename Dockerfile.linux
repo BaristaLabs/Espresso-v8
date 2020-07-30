@@ -109,6 +109,7 @@ ARG V8_VERSION
 
 # Checkout the desired version
 RUN cd v8 \
+    && git fetch \
     && git checkout ${V8_VERSION}
 
 # Attempt to fix clang++
@@ -131,3 +132,12 @@ RUN cd v8 \
     && /build/ninja/ninja -C out/v8.release ${V8_TARGET}
 
 RUN readelf -h /build/v8/out/v8.release/obj/libv8_monolith.a > libv8_monolith_elf.txt
+
+# Create the binaries layer that only contains the built binaries, headers and other metadata
+FROM --platform=${TARGETPLATFORM} ${BASE_IMAGE} as binaries
+
+# Copy built/generated artifacts
+
+COPY --from=source /build/v8/obj/*.a /v8/
+COPY --from=source /build/libv8_monolith_elf.txt /v8/
+COPY --from=source /build/v8/include/ /v8/include/
